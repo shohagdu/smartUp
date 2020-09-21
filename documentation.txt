@@ -1,0 +1,116 @@
+version: 01-05-2019
+====================
+a) add column in personalinfo (ALTER TABLE `personalinfo` ADD `holding_no` VARCHAR(10) NOT NULL AFTER `mstatus`;)
+b) add column holding_no in payment_log_bosotbita(ALTER TABLE `payment_log_bosotbita` ADD `holding_no` VARCHAR(10) NOT NULL AFTER `invoice`;)
+c)barrier add holding tax clear for nogorik certificate
+
+
+
+version: 4.0.4(03-02-2019)
+==========================
+ a) warish not add
+ b) column add(ALTER TABLE `tbl_warishesinfo` ADD `note` MEDIUMTEXT NULL DEFAULT NULL AFTER `verifier_name`;)
+
+version: 4.0.3
+=====setup form======
+	a) gram english
+	b) thana english
+	c) district english
+3+default 6 column add setup_tbl
+========= certificate========
+english heading add all certificate
+bangal heading correction 
+
+
+version: 4.0.2
+==== word member===
+	a) word member form modify, modify word number database table
+	b) ajax call add, 
+	c) bootstrap 3 validation add
+	d) word member update process
+	e) word member delete process add
+===== bosot bitar rate sheet page ====
+	a) page design upgrade
+	b) bootstrap 3 validation add
+	c) update process add
+	d) table change, is_current and is_active column add
+	e) process change is_current column wise process
+======bosto bitar registration page ===
+	a) page desin upgrade
+	b) bootstrap 3 validation add
+	c) process change
+======= assesment form====
+	a) only show bosot bitar people list
+================================
+induvidual page create for
+bosot bita registration form, bosto bita kor aday form, tradelicense bosot bita kor form, tradelicense pesjibikor form
+
+
+
+version: 4.0.1
+1) daily report and daily vat reoprt updated
+mvc partern
+
+
+version: 4.0.0
+1) db excuation increase: mysqli_resutl.php line-183
+2) dailyReport controller update
+3) dailyReport model update
+4)daily collection page update
+
+version 3.9.4
+1) tradelicence due calculation thik kora hoyece..
+2) force password change 1 day(db- admin passDateTime add).....
+running........
+
+
+
+version 3.9.3
+1) sms api form thik kora hoicce
+2) sms api a sms send form change kora hoicee
+3) expire tradelicens a message send change hoicce
+
+
+version 3.9.2
+
+11-06-2017
+
+1) all certificate tracking url getting domain name . (before union porishad name)
+2) all application tracking url getting domain name . (before union porishad name)
+3)1) Mamla tracking url getting domain name . (before union porishad name)
+4) application chairman sign add(befor gonnomanno begti)
+5) other service application nid, bcno, pno validation off!!!
+
+
+
+version 3.9.1
+
+1) admin table er username field ta unique kora hoyece.
+2) user server validation kora hoyecee
+3) track url change in every certificate
+4? track url change in every application
+5) track url change in mamla
+add 9 new controller 
+
+Nctrack--- nagorick certificate
+Ntrack-- nagorick application
+Tctrack----- tradelicense certificate
+Ttrack-----tradelicense application
+Octrack----- other service sertificate
+Otrack------ other service application
+Wctrack------ warish certificate
+Wtrack----- warish application
+Mtrack------ mamla jajacia
+
+
+
+version 3.9
+
+
+1) setup url auto generate
+2) mobile number replace chairman mobile number(setup form)
+3) phone replace socib mobile number(setup form)
+4) union code hints change
+5) postal code hints add
+
+

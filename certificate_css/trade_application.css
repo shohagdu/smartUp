@@ -1,0 +1,483 @@
+/**=========== print css start===========**/
+@media print{
+div#bar{
+display:none;
+}
+body{
+	background:white !important;
+}
+}
+
+/**=========== print css end===========**/
+
+/**========css reset start=============**/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/**========css reset end=============**/
+
+/**===========common css start==============**/
+body{
+/*	color:#285e67; */
+	color:black;
+	overflow-y:scroll;
+	font-size:15px;
+	font: 100% Arial,georgian,sans-serif,serif,times;
+	background:#eee;
+}
+.fix{
+	overflow:hidden;
+}
+.structure{
+	display:block;
+}
+.full{
+	width:100%;
+}
+#wrapper{
+	min-height:1350px;
+	height:auto !important;
+	width:960px;
+	margin:0px auto;
+	background:white;
+	border:1px solid black;
+	overflow:initial;
+	display:block;
+}
+
+
+
+/**======= top area start==========  **/
+.top_area{
+	width:99%;
+	background:white;
+	margin:0px auto;
+}
+.top_section{
+	height:145px;
+	width:95%;
+	border:1px solid black;
+	margin:0px auto;
+	margin-top:10px;
+}
+#top_left{
+	width: 20%;
+	float: left;
+    position: relative;
+    top: 6px;
+    left: 15px;
+}
+#top_mid{
+	width:60%;
+	float:left;
+	position:relative;
+	top:0px;
+	left:0px;
+}
+#top_mid h2{
+	font-size:22px;
+	font-weight:bold;
+	text-align:center;
+	font-style:normal;
+}
+#top_mid p{
+	font-size:16px;
+	font-weight:normal;
+	font-style:normal;
+	text-align:center;
+}
+.input_style4{
+	width:180px;
+	border:none;
+	border-bottom:1px dashed black;
+	background:none;
+	font-size:14px;
+	color:darkgray;
+	font-weight:bold;
+}
+#top_right{
+	width: 20%;
+	float: left;
+	position: relative;
+	top: 2px;
+	left: 0px;
+}
+/**======= top area end==========  **/
+
+/**============ header area start==========**/
+.header_area{
+	width:99%;
+	background:white;
+	margin:5px auto;
+}
+.header_section{
+	width:94%;
+	margin:0px auto;
+	background:#F5F5F5;
+	border:0px solid black;
+	padding:2px;
+}
+.header_section h2{
+	font-size:22px;
+	font-weight:bold;
+	text-align:center;
+	font-style:normal;
+	/* background:#F5F5F5; */
+}
+.header_section  span{
+	font-size:18px;
+	font-weight:bodd;
+	float:right;
+	margin-right:-65px;
+	margin-top:5px;
+}
+.header_section span input{
+	font-weight:bold;
+	font-size:16px;
+	background:none;
+	border:none;
+	width:32%;
+}
+/**============ header area start==========**/
+
+/**============ application area start==========**/
+.app_area{
+	width:99%;
+	background:white;
+	margin:0px auto;
+}
+.app_section{
+	background:white;
+	width:94%;
+	margin:0px auto;
+	position:relative;
+	top:0px;
+	left:0px;
+	border:0px solid black;
+	padding:1px;
+}
+#app_section_left{
+	width: 8%;
+	height: 456px;
+	float: left;
+	background: #F5F5F5;
+	position: relative;
+	top: 0px;
+	left: 0px;
+}
+#app_section_left p{
+	font-size: 28px;
+	font-weight: bold;
+	left: -68px;
+	position: relative;
+	top: 325px;
+	transform: rotate(-90deg);
+	width: 220px;
+}
+#app_section_left span input{
+	font-size: 25px;
+	font-weight: bold;
+	left: -57px;
+	position: relative;
+	top: 55px;
+	transform: rotate(270deg);
+	width: 195px;
+	background: #f5f5f5;
+	border: 1px solid black;
+}
+#app_section_right{
+	width:92%;
+	height:456px;
+	float:left;
+	background:white;
+	position:relative;
+	top:0px;
+	left:0px;
+	overflow-y:hidden;
+	overflow-x:hidden;
+	border-bottom:1px dashed black;
+}
+#app_section_right .table1{
+	width:100%;
+}
+#app_section_right .table1 tr td{
+	border:1px dashed black;
+	height:34px;
+	vertical-align:center;
+	border-right:none;
+
+}
+#app_section_right .table1 tr td input{
+	height: 22px;
+	font-weight:bold;
+	font-size:14px;
+	left: 0;
+	position: relative;
+	top: 1px;
+	width:400px;
+	border:none;
+	background:none;
+	padding:1px;
+}
+#app_section_right .table1 tr td select{
+	height: 22px;
+	left: 0;
+	position: relative;
+	top: 5px;
+}
+#app_section_right .table1 tr td textarea{
+	margin:0px;
+	padding:0px;
+	left: 15px;
+	position: relative;
+	top: -16px;
+	border:none;
+	resize:none;
+	background:none;
+	font-weight:bold;
+	font-size:14px;	
+}
+
+
+/**============ application area end==========**/
+
+/**============ cost area start==========**/
+/* .cost_area{
+	width:99%;
+	background:white;
+	float:left;
+}
+
+.cost_section{
+	width: 93.5%;
+	margin: 0px auto;
+	position: relative;
+	top: 20px;
+	left: 0px;
+	padding:5px;
+	margin-bottom:5px;
+	border:0px solid black;
+}
+.cost_section .table2{
+	width:100%;
+}
+.cost_section .table2 td{
+	font-size:18px;
+	font-weight:normal;
+}
+.cost_section .table2 td input{
+	font-weight:bold;
+	height:20px;
+	width:150px;
+	font-size:18px;
+} */
+
+
+/**============ cost area end==========**/
+
+/**============ instruction area start==========**/
+.ins_area{
+	width:99%;
+	float:left;
+	margin-top:100px;
+	border:none;
+}
+.ins_section{
+	width:95%;
+	margin:0px auto;
+	position:relative;
+	top:0px;
+	left:0px;
+	background:white;
+	overflow:hidden;
+	border:0px solid black;
+}
+.ins_section_inner{
+	width:100%;
+	float:left;
+	border-top:1px solid black;
+}
+.ins_section h2{
+	text-align:center;
+	font-size:20px;
+	font-weight:bold;
+	text-decoration:underline;
+	margin-bottom:20px;
+
+}
+.ins_section a{
+	font-size:14px;
+	font-style:normal;
+	font-weight:normal;
+	color:blue;
+}
+
+/**============ instruction area end==========**/
+
+/**============ app_sign area start==========**/
+.app_sign_area{
+	width:99%;
+	float:left;
+	margin-top:100px;
+	
+}
+.app_sign_section{
+	width:95%;
+	margin:0px auto;
+	position:relative;
+	top:0px;
+	left:0px;
+	background:white;
+	overflow:hidden;
+	border:0px solid black;
+}
+.app_sign_section h2{
+    font-size: 20px;
+    font-weight: bold;
+  /*   margin-bottom: 26px; */
+    text-indent:480px;
+    text-decoration: underline;
+}
+.app_sign_section_inner{
+	width:100%;
+	float:left;
+	border-top:1px solid black;
+}
+.app_sign_section .table3{
+	height:auto;
+	width:100%;
+	margin-top:26px;
+}
+
+.app_sign_section .table3 tr td{
+	border:0px solid black;
+}
+.app_sign_section .table3 tr td img{
+	padding: 0px;
+	position: relative;
+	top: 5px;
+	left: 20px;
+}
+#name_sil{
+	width:70%;
+	float:right;
+	line-height:22px;
+	margin-top:20px;
+	margin-right:80px;
+	display:block;
+	border-top:1px dashed black;
+	vertical-align:bottom;
+}
+/* .app_sign_section .table_footer{
+	width:100%;
+	margin-top:20px;
+	height:225px;
+	overflow:hidden;
+}
+.app_sign_section .table_footer tr td{
+	border:1px solid black;
+	text-align:center;
+}
+.app_sign_section .table_footer tr td p{
+		font-size:17px;
+		font-weight:bold;
+		position:relative;
+		top:15px;
+		left:0px;
+}
+.app_sign_section table td img{
+	left: 15px;
+	position: relative;
+	top: 84px;
+} */
+
+/**============ app_sign area end==========**/
+
+/**============ footer area start==========**/
+.footer_area{
+	width:99%;
+	background:white;
+	float:left;
+}
+.footer_section{
+	width:95%;
+	margin:0px auto;
+	display:block;
+	overflow:hidden;
+	position:relative;
+	top:0px;
+	left:0px;
+}
+#footer_section_left{
+	width:79%;
+	float:left;
+	position:relative;
+	top:0px;
+	left:0px;
+	text-align:center;
+	font-size:15px;
+	font-weight:normal;
+	opacity:0.8;
+	font-style:normal;
+	display:block;
+}
+
+#footer_section_right{
+	width:19%;
+	float:right;
+	position:relative;
+	top:0px;
+	left:0px;
+	text-align:center;
+	font-size:10px;
+	opacity:0.6;
+	font-style:normal;
+	display:block;
+}
+/**============ footer area end==========**/

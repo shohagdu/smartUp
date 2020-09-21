@@ -1,0 +1,60 @@
+// due amount calculation 
+
+condition 1: when 
+$cYear = '2017';
+$cMonth = '07';
+$expire_year = '2017';
+$issue_year = '2017';
+
+
+
+condition 2: when 
+first case: true
+$cYear = '2019';
+$cMonth = '05';
+$expire_year = '2017';
+$issue_year = '2017';
+
+secont case : false// ei rokom kokhono hobe na
+$cYear = '2017';
+$cMonth = '05';
+$expire_year = '2017';
+$issue_year = '2017';
+
+condition 3: when 
+first case:
+$cYear = '2019';
+$cMonth = '05';
+$expire_year = '2017';
+$issue_year = '2016';
+
+second case :
+$cYear = '2018';
+$cMonth = '06';
+$expire_year = '2017';
+$issue_year = '2017';
+
+third case :
+$cYear = '2019';
+$cMonth = '06';
+$expire_year = '2017';
+$issue_year = '2016';
+
+condition 4: when
+first case:
+$cYear = '2019';
+$cMonth = '07';
+$expire_year = '2017';
+$issue_year = '2016';
+
+second case:
+$cYear = '2019';
+$cMonth = '07';
+$expire_year = '2017';
+$issue_year = '2017';
+
+third case:
+$cYear = '2017';
+$cMonth = '06';
+$expire_year = '2017';
+$issue_year = '2017';

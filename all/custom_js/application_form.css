@@ -1,0 +1,121 @@
+.app-heading{
+	margin-top:20px;
+	margin-bottom:20px;
+	text-align:center;
+	font-weight:900;
+	text-decoration:underline;
+	font-size:16px;
+	font-style:normal;
+	padding-left: 10%;
+}
+.app-sub-heading{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size:14px;
+	font-style:normal;
+	font-weight:700;
+	text-align:center;
+}
+#comment{
+	resize:none;
+}
+.button-style{
+	margin-bottom:30px;
+	margin-top: 10px;
+}
+.all-input-form label{
+	color: #413839;
+	opacity:0.9;
+}
+.all-input-form label>span{
+	color:red;
+}
+.all-input-form input[type="text"],
+.all-input-form input[type="file"],
+.all-input-form select{
+	color: #0C090A;
+	font-size:13px;
+	font-weight:500;
+}
+#attachment{
+	resize:none;
+	color: #0C090A;
+	font-size:14px;
+	font-weight:400;
+}
+/* mozila fire fox file input code start */
+@-moz-document url-prefix() {
+    .input-file-sm {
+        height: auto;
+        padding-top: 2px;
+        padding-bottom: 1px;
+    }
+}
+/* mozila fire fox file input code end */
+/* for oarish css*/
+.all-input-form h3{
+	color: black;
+	opacity:0.9;
+	font-size:16px;
+	font-weight:normal;
+	font-style:normal;
+}
+.extra-margin{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.sub-extra-margin{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.small-font{
+	font-size: 11px;
+	font-weight: 600;
+	font-style:normal;
+	font-family: SolaimanLipi,Georgia, serif;
+}
+.sub-hints{
+	font-size: 10px;
+	margin-top: 5px;
+	font-style: italic;
+	opacity: 0.6;
+	text-align: center;
+	color: red;
+}
+.custom-label-text{
+	font-size: 15px;
+	text-align: left;
+	white-space: nowrap;
+}
+.custom-info-text{
+	font-size: 15px;
+}
+.highlight-green{
+	color: green;
+	font-weight: bolder;
+}
+.highlight-red{
+	color: red;
+	font-weight: bolder;
+}
+.more-highlight{
+	text-align: left;
+	font-size: 18px;
+	color: blue;
+}
+.fiscal-year-heading{
+	text-indent: 20px;
+}
+.holding-type-heading{
+	text-indent: 10px;
+}
+.amount-heading{
+	text-indent: 5px;
+}
+.no-margin{
+	margin: 2px;
+}
+.custom-padding{
+	padding-left: 6px !important;
+	padding-right: 6px !important;
+}

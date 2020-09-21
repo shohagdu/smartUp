@@ -1,0 +1,372 @@
+/**=========== print css start===========**/
+@media print{
+div#bar{
+display:none;
+}
+body{
+	background:white !important;
+}
+}
+
+/**=========== print css end===========**/
+
+/**========css reset start=============**/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/**========css reset end=============**/
+
+/**===========common css start==============**/
+body{
+/*	color:#285e67; */
+	color:black;
+	overflow-y:scroll;
+	font-size:15px;
+	font: 100% Arial,georgian,sans-serif,serif,times;
+	background:#eee;
+}
+.full{
+	width:100%;
+	background:#eee;
+}
+#wrapper{
+	min-height:1350px;
+	height:auto !important;
+	width:960px;
+	margin:0px auto;
+	background:white;
+	border:1px solid black;
+	overflow:initial;
+	display:block;
+}
+
+
+
+/**======= top area start==========  **/
+.top_area{
+	width:99%;
+	background:white;
+	margin:0px auto;
+}
+.top_section{
+	height:145px;
+	width:95%;
+	border:1px solid black;
+	margin:0px auto;
+	margin-top:10px;
+}
+#top_left{
+	width: 20%;
+	float: left;
+    position: relative;
+    top: 6px;
+    left: 15px;
+}
+#top_mid{
+	width:60%;
+	float:left;
+	position:relative;
+	top:0px;
+	left:0px;
+}
+#top_mid h2{
+	font-size:22px;
+	font-weight:bold;
+	text-align:center;
+	font-style:normal;
+	color:darkblue;
+}
+#top_mid p{
+	font-size:16px;
+	font-weight:normal;
+	font-style:normal;
+	text-align:center;
+}
+.input_style4{
+	width:180px;
+	border:none;
+	border-bottom:1px dashed black;
+	background:none;
+	font-size:14px;
+	color:darkgray;
+	font-weight:bold;
+}
+#top_right{
+	width: 20%;
+	float: left;
+	position: relative;
+	top: 2px;
+	left: 0px;
+}
+/**======= top area end==========  **/
+
+/**============ header area start==========**/
+.header_area{
+	width:99%;
+	background:white;
+	margin:5px auto;
+}
+#header_section{
+	width:95%;
+	margin:0px auto;
+	background:#f5f5f5;
+	padding:2px;
+}
+#header_section h2{
+	font-size:24px;
+	font-weight:bold;
+	text-align:center;
+	font-style:normal;
+	color:#00008B;
+}
+#header_section table{
+	width:80%;
+	height:25px;
+}
+#header_section table td{
+	font-size:22px;
+	font-weight:bold;
+	text-align:right;
+	color:#315D2C;
+}
+#header_section table input{
+	float: left;
+	height: 22px;
+	font-weight:bold;
+	font-size:16px;
+	width: 200px;
+	position: relative;
+	top: 7px;
+	left: 10px;
+}
+/**============ header area start==========**/
+
+/**============ application area start==========**/
+.app_area{
+	width:99%;
+	background:white;
+	margin:10px auto;
+}
+#app_section{
+	width:95%;
+	margin:0px auto;
+	position:relative;
+	top:0px;
+	left:0px;
+	background:white;
+}
+#app_section table{
+	width:80%;
+}
+#app_section table td{
+	font-size:17px;
+	border:0px solid black;
+}
+#app_section table td p{
+	font-weight:bold;
+	padding:2px;
+}
+/**============ application area end==========**/
+
+/**============ table area start==========**/
+
+.table_area{
+	width:99%;
+	background:white;
+	margin:0px auto;
+}
+#table_section{
+	width:94%;
+	margin:0px auto;
+	border:0px solid black;
+	padding:2px;
+	display:block;
+	overflow:hidden;
+	position:relative;
+	top:0px;
+	left:0px;	
+}
+#table_section h2{
+	font-size:20px;
+	font-weight:bold;
+	position:relative;
+	top:0px; 
+	left:0px;
+}
+#table_section .table1{
+	width:100%;
+
+}
+#table_section .table1 tr th{
+	font-size:16px;
+	font-weight:bold;
+	border:1px solid black;
+}
+#table_section .table1 tr td{
+	border:1px solid black;
+	text-align:center;
+}
+
+/**============ table area end==========**/
+
+/**============ Instraction area start==========**/
+.ins_area{
+	width:99%;
+	background:white;
+	margin:0px auto;
+}
+#ins_section{
+	width:95%;
+	margin:0px auto;
+	overflow:hidden;
+	display:block;
+	position:relative;
+	top:0px;
+	left:0px;
+}
+#ins_section h2{
+	font-size:20px;
+	text-decoration:underline;
+	font-weight:bold;
+	font-style:normal;
+	text-align:center;
+	margin-bottom:10px;
+}
+
+/**============ Instraction area end==========**/
+
+/**============ verification area start==========**/
+.veri_area{
+	width:99%;
+	background:white;
+	margin:0px auto;
+}
+#veri_section{
+	width:94%;
+	margin:0px auto;
+	border:0px solid black;
+	padding:2px;
+	display:block;
+	overflow:hidden;
+	position:relative;
+	top:0px;
+	left:0px;
+}
+#veri_section h2{
+	font-size:20px;
+	text-decoration:underline;
+	font-weight:bold;
+	font-style:normal;
+	text-align:center;
+	margin-bottom:13px;
+}
+#veri_section .table2{
+	width:99%;
+	margin:0px auto;
+}
+#veri_section .table2 tr td{
+	border:0px solid black;
+	text-align:center;
+}
+#veri_section .table2 input{
+	border:none;
+	background:none;
+	border-bottom:1px dashed black;
+	padding-top:60px;
+}
+/**============ verification area end==========**/
+
+/**============ footer area start==========**/
+.footer_area{
+	width:99%;
+	background:white;
+	float:left;
+}
+.footer_section{
+	width:95%;
+	margin:0px auto;
+	display:block;
+	overflow:hidden;
+	position:relative;
+	top:0px;
+	left:0px;
+}
+#footer_section_left{
+	width:79%;
+	float:left;
+	position:relative;
+	top:0px;
+	left:0px;
+	text-align:center;
+	font-size:15px;
+	font-weight:normal;
+	opacity:0.8;
+	font-style:normal;
+	display:block;
+}
+#footer_section_left input{
+	border:none;
+	background:none;
+	border-bottom:1px dashed black;
+	width:70px;
+	text-align:center;
+}
+#footer_section_right{
+	width:19%;
+	float:right;
+	position:relative;
+	top:6px;
+	left:0px;
+	text-align:center;
+	font-size:10px;
+	opacity:0.6;
+	font-style:normal;
+	display:block;
+}
+/**============ footer area end==========**/

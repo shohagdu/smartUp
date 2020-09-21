@@ -1,0 +1,230 @@
+	<div id="content" class="col-lg-10 col-sm-10">
+		<link rel="stylesheet" media="screen,projection" type="text/css" href="<?php echo base_url();?>library/mystyle.css" />
+		<script type="text/javascript" src="<?php echo base_url();?>library/custom.js"></script>
+		<style type="text/css"> 
+			@-moz-document url-prefix() {
+				.input-file-sm {
+					height: auto;
+					padding-top: 2px;
+					padding-bottom: 1px;
+				}
+			}
+			.medium-font{
+				font-size: 15px;
+				font-weight: normal;
+			}
+			.medium-font-inupt{
+				font-size: 16px !important;
+				letter-spacing: 1px;
+				color: #333 !important;
+			}
+			.all-input-form label>span{
+				color:red;
+			}
+		</style>
+		<script type="text/javascript">
+			// for validation .............
+			function validation(){
+				var full_name=document.getElementById('full_name').value;
+				var father_name=document.getElementById('father_name').value;
+				var gram=document.getElementById('gram').value;
+				var word_no=document.getElementById('word_no').value;
+				var sector_no=document.getElementById('sector_no').value;
+				var dofb=document.getElementById('dofb').value;
+				var pattern = /^[\s()+-]*([0-9][][০-৯][\s()+-]*){6,20}$/;
+
+				if(full_name==''){
+					document.getElementById('error').innerHTML='দয়া করে মুক্তিযোদ্ধার নাম প্রদান করূন';
+					return false;
+				}
+				else if(father_name==''){
+					document.getElementById('error').innerHTML="দয়া করে মুক্তিযোদ্ধার পিতার নাম প্রদান করুন";
+					return false;
+				}
+				else if(gram==''){
+					document.getElementById('error').innerHTML="দয়া করে গ্রামের নাম প্রদান করুন";
+					return false;
+				}
+				else if(word_no==''){
+					document.getElementById('error').innerHTML="দয়া করে ওয়ার্ড নং প্রদান করুন";
+					return false;
+				}
+				else if(sector_no==''){
+					document.getElementById('error').innerHTML="দয়া করে সেক্টর নং প্রদান করুন";
+					return false;
+				}
+				else if(dofb==''){
+					document.getElementById('error').innerHTML='দয়া করে জম্ম তারিখ প্রদান করুন ।';
+					return false;
+				}
+
+
+				else {
+					return true;
+				}
+			}
+			
+			// for images upload........
+			var loadFile=function(event){
+				var output=document.getElementById("image");
+				output.src=URL.createObjectURL(event.target.files[0]);
+			};
+		</script>
+		<script>
+			$(function() {
+				$( "#dofb" ).datepicker({
+					changeMonth: true,
+					changeYear: true,
+					autoSize: true,
+					dateFormat: 'dd-mm-yy'
+				});
+			});
+		</script>
+		<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+		<!--<script>tinymce.init({ selector:'textarea' });</script>--->
+		<script>
+		tinymce.init({ selector:'textarea',
+		fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+		toolbar: "undo redo | sizeselect | bold italic | fontselect |  fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"});
+
+		</script>
+		<!-- some information query -->
+		<div class="row">
+			<div class="col-md-12"> 
+				<div class="panel panel-primary">
+					<div class="panel-heading" style="font-weight: bold; font-size: 15px;background:#004884;text-align:center;">আপনার ইউনিয়ন পরিষদের মুক্তিযোদ্ধার তথ্য আপডেট করুন</div>
+					<div class="panel-body all-input-form">
+						<div class="row" style="margin-bottom: 10px;"> 
+							<div class="col-sm-3 pull-right"> 
+								<a href="Manage/unionPorishad">
+									<button type="button" class="btn-success btn-sm pull-right">মুক্তিযোদ্ধাদের তালিকা</button>
+								</a>
+							</div>
+						</div>
+						<form action="Manage/updateFighter_action" method="post" onsubmit="return validation();" id="fixedInputTest" enctype="multipart/form-data" class="form-horizontal">
+							
+							<div class="row"> 
+								<div class="col-sm-12"> 
+									<div class="form-group"> 
+										<div class="col-sm-6 col-sm-offset-3" id="UPLOAD"> 
+											<img src="library/profile/fighters/<?php if($row->pic !=''): echo $row->pic; else: echo "default.jpg";endif;?>" id="image" name="pic" class="img-thumbnail" style="height:160px;width:180px;" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Picture" class="col-sm-3 control-label">ছবি</label>
+										<div class="col-sm-6">
+											<input type="file" name="picture" id="pic" title="please select images" class="form-control input-file-sm" onchange="loadFile(event)" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Full Name" class="col-sm-3 control-label">নাম  <span>*</span></label>
+										<div class="col-sm-6">
+											<input type="text" name="full_name" id="full_name" class="form-control medium-font-inupt fixed_test_valid"placeholder="মুক্তিযোদ্ধার নাম প্রদান করূন" value="<?php echo $row->full_name;?>" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Father Name" class="col-sm-3 control-label">পিতার নাম  <span>*</span></label>
+										<div class="col-sm-6">
+											<input type="text" name="father_name" id="father_name" class="form-control medium-font-inupt fixed_test_valid" placeholder="মুক্তিযোদ্ধার পিতার নাম প্রদান করূন " value="<?php echo $row->father_name;?>" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="National id" class="col-sm-3 control-label">জাতীয় পরিচয়পত্র নং</label>
+										<div class="col-sm-6">
+											<input type="text" name="n_id" id="n_id"  class="form-control medium-font-inupt" placeholder="জাতীয় পরিচয় পত্র  নম্বর   প্রদান করূন" value="<?php echo $row->n_id;?>" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Village" class="col-sm-3 control-label">গ্রাম(বাংলায়)<span>*</span></label>
+										<div class="col-sm-6">
+											<input type="text" name="gram" id="gram"  class="form-control medium-font-inupt fixed_test_valid" placeholder="গ্রাম প্রদান করূন" value="<?php echo $row->gram;?>" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Word no" class="col-sm-3 control-label">ওয়ার্ড নং<span>*</span></label>
+										<div class="col-sm-6">
+											<input type="text" name="word_no" id="word_no"  class="form-control medium-font-inupt fixed_test_valid" placeholder="ওয়ার্ড নং প্রদান করূন" value="<?php echo $row->word_no;?>" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Sector no" class="col-sm-3 control-label">সেক্টর নং<span>*</span></label>
+										<div class="col-sm-6">
+											<input type="text" name="sector_no" id="sector_no"  class="form-control medium-font-inupt fixed_test_valid" placeholder="সেক্টর নং প্রদান করূন" value="<?php echo $row->sector_no;?>" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Mobile" class="col-sm-3 control-label">মোবাইল  </label>
+										<div class="col-sm-6">
+											<input type="text" name="mobile" id="mobile" class="form-control medium-font-inupt" placeholder="মোবাইল নম্বর  প্রদান করূন" maxlength="11" value="<?php echo $row->mobile;?>" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Date of birth" class="col-sm-3 control-label">জম্ম তারিখ   <span>*</span></label>
+										<div class="col-sm-6">
+											<input type='text' name='dofb' id='dofb' class="form-control medium-font-inupt fixed_test_valid" placeholder="01-01-1980 জম্ম তারিখ প্রদান করুন ।" value="<?php echo $row->dofb;?>" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row medium-font">
+								<div class="col-sm-12"> 
+									<div class="form-group">
+										<label for="Life History" class="col-sm-3 control-label">জীবনবৃত্তান্ত </label>
+										<div class="col-sm-8">
+											<textarea name="life_history" class="form-control" id=""  rows="8" ><?php echo $row->life_history;?></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-offset-3 col-sm-1">
+									<input type="hidden" name="id" value="<?php echo $row->id;?>" />
+									<input type='submit' value="আপডেট করুন" name='fighter_update' class="btn btn-info btn-sm"/>
+								</div>
+								<div class="col-sm-6 pull-left"> 
+									<span id="error" style="font-size:18px;font-family:comicsans-ms;color:red;"></span>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div><!--- / panel primary----->
+			</div>
+		</div><!-- row end--->
+	</div><!--/#content.col-md-10-->
+</div><!--/fluid-row-->

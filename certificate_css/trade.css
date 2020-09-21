@@ -1,0 +1,163 @@
+*{
+	margin: 0px;
+	padding: 0px;	
+}
+body{
+	margin:0px;
+	padding:0px;
+	background-color:lightgray;
+	font-family:solaimanLipi;
+	font-size: 14px;
+}
+
+#main{
+	height: 14.5in;
+	width: 8.5in;
+	background-color: #FFFFFF;
+	margin: 0px auto;
+	border: 0px solid red;
+	overflow: hidden;
+	display: table;
+	clear: both;
+}
+
+
+#main_second{
+	height: 14.5in;
+	width: 8.5in;
+	float: left;
+}
+#muri{
+	height:3.3in;
+	width:8.3in;
+	border-bottom:2px dotted black;
+	margin:0px auto;
+	margin-bottom:10px;
+	padding:1px;
+	position:relative;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	overflow: hidden;
+	display: block;
+	clear: both;
+}
+.headding-main{
+	overflow: hidden;
+	height: 55px;
+}
+table.muri_table tr td input{
+	border:none;
+	background:none;
+} 
+table.muri_table tr td p{
+	border-bottom: 1px dashed black;
+	font-size: 14px;
+	
+} 
+.tradhead{
+	text-align:center;
+	width:90px;
+	height:20px;
+	box-sizing: border-box;
+	margin:0px auto;
+	border-radius:10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	font-size: 14px;
+	line-height: 21px;
+	color:white;
+	font-style:normal;
+	background:pink;
+	overflow: hidden;
+	
+}
+.tradheadEng{
+	text-align:center;
+	font-size: 12px;
+	width:120px;
+	line-height: 20px;
+	height:20px;
+	box-sizing: border-box;
+	margin:0px auto;
+	border-radius:10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	color:white;
+	font-style:normal;
+	background:pink;
+	overflow: hidden;
+	
+}
+.wrapper{
+	border: 9px solid transparent;
+	margin:0 auto;
+	border-image: url(../assets/img/border-image/border.png) 20% round;
+	height:10.7in;
+	width:8.2in;
+	position: relative;
+	background-size:70%;
+	outline:4px solid #1C5A03;
+}
+.jolchap {
+	background: url(../site_image/logo_bd3.png)no-repeat center;
+	padding-bottom: 15px;
+	background-size:85%;
+}
+#cert{
+	height: 10.7in;
+	width: 8.2in;
+	float: left;
+	border: 0px solid yellow;
+	overflow: hidden;
+	display: block;
+}
+.cert-heading{
+	text-align:center; 
+	font-size:23px; 
+	font-weight:bold;
+	width: 160px;
+	height: 30px;
+	overflow: hidden;
+	background: white;
+	letter-spacing: 1px;
+	margin: 0px auto;
+	border: 1px solid black;
+	box-shadow: 1px 1px black;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+}
+
+/*  - For Print
+------------------------------------------------------*/
+.print-certificate {
+	width: 77px;
+	height: 76px;
+	position: fixed;
+	padding: 5px;
+	bottom: 30px;
+	right: 30px;
+	color: #ffffff;
+	font-size: 2em;
+	text-align: center;
+	line-height: 36px;
+	background-color: #D3D3D3;
+	-moz-border-radius: 6px 20px 6px 20px;
+	-webkit-border-radius: 6px 20px 6px 20px;
+	border-radius: 6px 20px 6px 20px;
+	z-index: 9999;
+}
+.print-certificate img{
+	width: 70px;
+	height: 70px;
+	margin-top: 5px;
+	cursor: pointer;
+}
+@media all and (max-width: 1065px) {
+    #print-full-page {
+        display:none;
+    }
+}
+/*  - For Print End
+------------------------------------------------------*/

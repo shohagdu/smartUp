@@ -1,0 +1,36 @@
+body{    background: #ececec;	/*background-attachment: fixed;*/}.fl{float:left;}.fr{float: right;}.main{	width: 90%;	margin-left: auto;    margin-right: auto;	background-color: #e2deda;    margin-top: 0px;    -moz-box-shadow:0px 6px 8px 9px #ccc;    -webkit-box-shadow:0px 6px 8px 9px #ccc;    box-shadow:0px 6px 8px 9px #ccc;    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#cccccc')";    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#cccccc');}.header{	max-height:145px; 	background-color: #d3d4d5; 	 	}.logo{padding-left: 30px;}.login{margin-top: 0px; padding-right: 0px;}.menu{}.slid_show{margin-top:-20px; height: 5%;}.edu{font-size: 13px;}.scroll_news{	margin-top: 10px;	background-color: #d3d4d5; 	padding-top: 10px;}.main_con{	margin-top: 10px; 	padding-left:10px; 	padding-right:10px;}.left_con{}.principal_msg{}.right_con{}.photo_gallery{	min-height: 100px;	padding: 0px 10px 0px 10px;}.footer{	background-color: #d3d4d5;	padding: 10px 20px 0px 20px;}.user-row {    margin-bottom: 14px;}.user-row:last-child {    margin-bottom: 0;}.dropdown-user {    margin: 13px 0;    padding: 5px;    height: 100%;}.dropdown-user:hover {    cursor: pointer;}.table-user-information > tbody > tr {    border-top: 1px solid rgb(221, 221, 221);}.table-user-information > tbody > tr:first-child {    border-top: 0;}.table-user-information > tbody > tr > td {    border-top: 0;}
+
+/*404 page*/
+
+.page-404{
+  position:relative;
+  width:350px;
+  height:200px;    
+  margin:100px auto;
+  text-align: center;
+}
+
+.text-404{    
+  font-size:138px;
+  background:#e9e3dd;
+  background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQTdWeWNteABnbzguiXSBxmfc8Z8nh_HHoWoK35QL81x4HnpVmgvQ');
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
+  background-position: 100% 100%;
+  -webkit-animation: square 3s linear infinite;
+  -ms-animation: square 3s linear infinite;
+  animation: square 3s linear infinite;
+  -webkit-background-clip: text;
+  color:transparent;  
+  text-align:center;
+  line-height:200px;
+  position:relative;
+}
+
+.text-404:nth-of-type(2){
+  text-shadow:none;
+  z-index:2;
+  position:absolute;
+  top:-139px;
+  left:-1px;
+}

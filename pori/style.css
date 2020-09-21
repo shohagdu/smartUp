@@ -1,0 +1,43 @@
+
+.page {
+    width: 21cm;
+    min-height: 29.7cm;
+    margin: 1cm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	background:url("pori/pro-background.jpg") #A98436 no-repeat center center;
+	background-size: 100% 100%;
+}
+@page {
+    size: A4;
+    margin: 0;
+}
+	@media print {
+		.page {
+			margin: 0;
+			border: initial;
+			border-radius: initial;
+			width: initial;
+			min-height: initial;
+			box-shadow: initial;
+			background: initial;
+			page-break-after: always;
+		background:url("pori/pro-background.jpg") #A98436 no-repeat center center;
+		background-size: 100% 100%;
+		}
+
+		
+	}
+
+.content-text{bottom: 0;left: 130px;position: relative;top: 442px;}
+.content-text ul{margin:0px; padding:0px; list-style:none;}
+.content-text ul li{font-size: 25px;font-weight: bold;}
+.content-text ul li:last-child{margin-top: 15px;}
+.content-text ul li:nth-child(1){margin-top: 9px;}
+.content-text ul li:nth-child(2){margin-top: 19px;margin-left: 65px;}
+.content-text ul li:nth-child(3){margin-top: 19px;}
+.content-text ul li:nth-child(4){margin-top: 19px;}
+.content-text ul li:nth-child(5){margin-top: 19px;margin-left: 25px;}
+.content-text ul li:nth-child(6){margin-top: 30px;margin-left: 160px;}

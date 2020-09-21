@@ -1,0 +1,143 @@
+/* font size css start */
+.midum-font{
+	font-size: 18px;
+	font-family: solaimanlipi;
+	text-align: left;
+	font-style: normal;
+}
+/* font size css end */
+
+/* content css  start */
+.datetime{
+	margin-bottom: 20px;
+}
+.datetime h3{
+	font-size: 18px;
+	color: #333;
+	font-family: arial;
+}
+.datetime span.show-date-time{
+	font-size: 12px;
+	color: #333;
+	font-family: arial;
+}
+h5.short-heading{
+	color: #FFFFFF;
+	font-family: arial;
+	font-size: 14px;
+	background-color:#84154D;
+	/*background-color:#3071A9;*/
+	padding: 7px;
+	margin-bottom: 10px;
+}
+.quick-manage{
+	text-align:center;
+	min-height:115px;
+}
+.quick-manage img{
+	border: 1px solid #ddd;
+	margin-top: 15px;
+}
+.quick-manage p{
+	text-align: center;
+	font-size:87%;
+	margin-top:10px;
+	margin-bottom: 5px;
+}
+.badge-color-notification{
+	background: #FA5833;
+	color: #FFFFFF;
+}
+.badge-color{
+	background: #14AB04;
+	color: #FFFFFF;
+}
+.badge-color-warning{
+	background: #E90000;
+	color: #FFFFFF;
+}
+
+.badge-color-notification a{
+	background: #FA5833;
+	color: #FFFFFF;
+}
+.badge-color a{
+	background: #14AB04;
+	color: #FFFFFF;
+}
+.badge-color-warning a{
+	background: #E90000;
+	color: #FFFFFF;
+}
+.bank-table{
+	font-family: SolaimanLipi, tahoma;
+	font-weight:normal;
+	color: #333;
+	font-size:13px;
+}
+.bank-table .bank-footer{
+	color: #333;
+	font-weight: bold;
+	font-size: 14px;
+	background: #C0BCFC;
+}
+.sms-remaning{
+	font-size: 120%;
+	font-weight: 400;
+}
+/* application section */
+.btn-custom-head{
+	outline: 0px;
+	cursor:context-menu;
+	background: #ACD6A4;
+	color: #292F4E;
+	font-weight: bold;
+}
+
+/* bank transper css  start */
+.tit{
+	background: #f5f5f5;
+	text-indent: 20px;
+	color: black;
+	font-size: 140%;
+}
+.show_amount{
+	line-height: 37px;
+	color: blue;
+	font-size: 18px;
+	font-weight: bolder;
+	
+}
+/* bank transper css  end  */
+
+/*   tax collection start */
+
+
+/*   tax collection end */
+.red-color{
+	color: red !important;
+}
+.hints-heading{
+	padding-left: 15px;
+}
+.small-font{
+	font-size: 13px !important;
+	font-style: normal;
+	font-weight: normal;
+}
+.xs-font{
+	font-size: 10px !important;
+	font-style: normal;
+	font-weight: normal;
+}
+.opacity-heading{
+	font-size: 11px;
+	opacity: 0.5;
+	color: red;
+}
+.Enable{
+	color: green !important;
+}
+.Disable{
+	color: red !important;
+}
