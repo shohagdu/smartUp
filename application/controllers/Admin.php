@@ -6,7 +6,7 @@ class Admin extends CI_Controller {
 	public function __construct(){
 		ob_start();
 		parent::__construct();
-		
+        $this->load->library('session');
 		$this->load->model('Transition_model','transition');
 		$this->load->model('Generate_model','mgenerate');
 		$this->load->model('Manage_admin','manageAdmin');
@@ -14,12 +14,16 @@ class Admin extends CI_Controller {
 		$this->load->model('Security_set', 'sq');
 		$this->load->model('Role_chk', 'chk');
 
-		$logged_status=$this->session->userdata('logged_status');
+		 $logged_status=$this->session->userdata('logged_status');
+
 		// echo $this->sq->check_exist_q();
+
 		if($logged_status==FALSE){
 			redirect('mms24','location');
 		}
-		$passChang = $this->setup->forcePassChange();
+
+	    $passChang = $this->setup->forcePassChange();
+
 		if($passChang==false){
 			redirect("setup_section/changePassword");
 		}
@@ -43,6 +47,7 @@ class Admin extends CI_Controller {
 			'bank_report'=>$this->dashboard->getdata('acinfo'),
 			'sms_report'=>$this->dashboard->sms_query('inbox')
 		);
+
 		$this->load->view('admin/topBar',$data);
 		$this->load->view('admin/leftMenu');
 		$this->load->view('admin/content');

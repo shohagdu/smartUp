@@ -113,6 +113,14 @@
 	$tData=array(
 		'trackid'=>$trackid
 	);
+	if(isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
+		$profile_info = $this->setup->uploadimage($_FILES['file']);
+	}elseif(!empty($old_profile) && empty($_FILES['file']['name'])){
+		$profile_info=$old_profile;
+	}else{
+		$profile_info='img/default/profile.png';
+	}
+
 	// for tradelicense....
 	$data = array(
 		'trackid'		=> $trackid,
@@ -151,7 +159,7 @@
 		'mobile'		=> $mob,
 		'phone'			=> $phone,
 		'email'			=> $email,
-		'profile'		=> $profile,
+		'profile'		=> $profile_info,
 		'status'		=> 1,
 		'insert_time'	=> $insert_time,
 		'syn_status'	=> 1

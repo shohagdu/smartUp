@@ -485,7 +485,7 @@
 							message: 'The Mobile Number is required'
 						},
 						regexp: {
-							regexp: /^(?:\+?88)?01[15-9]\d{8}$/,
+							regexp: /^(?:\+?88)?01[13-9]\d{8}$/,
 							message: 'Invalid mobile number'
 						},
 						numeric: {

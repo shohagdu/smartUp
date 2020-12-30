@@ -1,6 +1,6 @@
 ﻿<?php 
 	extract($_POST);
-	//print_r($_POST);exit;
+
 	if(trim($bcomname)=="" || trim($ecomname)==""){ echo "আপনার সকল সঠিক তথ্য প্রদান করুন";exit;}
 	if($btype==""){echo "দয়া করে  আপানার ব্যবসার ধরন নির্বাচন করুন ";exit;}
 	
@@ -59,19 +59,27 @@
 	if(trim($nationid)=="") $nationid="";
 	if(trim($bcno)=="") $bcno="";
 	if(trim($pno)=="") $pno="";
+
+    if(isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
+        $profile_info = $this->setup->uploadimage($_FILES['file']);
+    }elseif(!empty($profile) && empty($_FILES['file']['name'])){
+        $profile_info=$profile;
+    }else{
+        $profile_info='img/default/profile.png';
+    }
 		
-		$imp_bwname=implode($bwname,",");
-		$imp_ewname=implode($ewname,",");
-		$imp_bfname=implode($bfname,",");
-		$imp_efname=implode($efname,",");
-		$imp_emname=implode($emname,",");
-		$imp_bmname=implode($bmname,",");
-		$imp_bhname=implode($bhname,",");
-		$imp_ehname=implode($ehname,",");
-		$imp_mstatus=implode($mstatus,",");
-		$imp_gender=implode($gender,",");
+    $imp_bwname=implode($bwname,",");
+    $imp_ewname=implode($ewname,",");
+    $imp_bfname=implode($bfname,",");
+    $imp_efname=implode($efname,",");
+    $imp_emname=implode($emname,",");
+    $imp_bmname=implode($bmname,",");
+    $imp_bhname=implode($bhname,",");
+    $imp_ehname=implode($ehname,",");
+    $imp_mstatus=implode($mstatus,",");
+    $imp_gender=implode($gender,",");
 		
-	$fqy=$this->db->query("UPDATE `tradelicense` SET trackid='$trackid', delivery_type='$delivery_type', bcomname='$bcomname', ecomname='$ecomname', bwname='$imp_bwname', ewname='$imp_ewname', vatid='$vatid', taxid='$taxid', btype='$btype', btype_english='$business_type_english', be_gram='$be_gram', be_rbs='$be_rbs', be_wordno='$be_wordno', be_dis='$be_dis', be_thana='$be_thana', be_postof='$be_postof', bb_gram='$bb_gram', bb_rbs='$bb_rbs', bb_wordno='$bb_wordno', bb_dis='$bb_dis', bb_thana='$bb_thana', bb_postof='$bb_postof', emname='$imp_emname', bmane='$imp_bmname', email='$email', mobile='$mob', phone='$phone', profile='$profile',bfname='$imp_bfname',efname='$imp_efname',gender='$imp_gender',mstatus='$imp_mstatus',bhname='$imp_bhname',ehname='$imp_ehname' where id='$uid'");
+	$fqy=$this->db->query("UPDATE `tradelicense` SET trackid='$trackid', delivery_type='$delivery_type', bcomname='$bcomname', ecomname='$ecomname', bwname='$imp_bwname', ewname='$imp_ewname', vatid='$vatid', taxid='$taxid', btype='$btype', btype_english='$business_type_english', be_gram='$be_gram', be_rbs='$be_rbs', be_wordno='$be_wordno', be_dis='$be_dis', be_thana='$be_thana', be_postof='$be_postof', bb_gram='$bb_gram', bb_rbs='$bb_rbs', bb_wordno='$bb_wordno', bb_dis='$bb_dis', bb_thana='$bb_thana', bb_postof='$bb_postof', emname='$imp_emname', bmane='$imp_bmname', email='$email', mobile='$mob', phone='$phone', profile='$profile_info',bfname='$imp_bfname',efname='$imp_efname',gender='$imp_gender',mstatus='$imp_mstatus',bhname='$imp_bhname',ehname='$imp_ehname' where id='$uid'");
 	//echo $this->db->last_query();exit;
 	echo "1"; exit;
 ?>

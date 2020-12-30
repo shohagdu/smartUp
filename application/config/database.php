@@ -8,9 +8,9 @@ date_default_timezone_set("Asia/Dhaka");
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'shohozit_smartup_user',
-	'password' => 'fwOW;sHkv=hJ',
-	'database' => 'shohozit_smartup_db',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'smart_up_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

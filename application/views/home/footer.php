@@ -1,4 +1,5 @@
-	<!---this is footer part start-->
+
+<!---this is footer part start-->
 	<style type="text/stylesheet">
 		.thumbnail {margin-bottom:6px;}
 		.carousel-control.left,.carousel-control.right{
@@ -55,7 +56,9 @@
 		});
 
 		/* activate the carousel */
-		$('#modalCarousel').carousel({interval:false});
+        // $(document).ready(function() {
+		//     $('#modalCarousel').carousel({interval:false});
+        // });
 
 		/* change modal title when slide changes */
 		$('#modalCarousel').on('slid.bs.carousel', function () {
@@ -132,14 +135,14 @@
 				<div class="footer" style="background-color:#004884;color: #fff;width:100%;margin:0px auto; "><!--Footer Start -->
 					<div class="row content">
 						<div class="col-md-8">
-							<p>&copy; copyright 2015. <a href="#" style="color:#fff;"><?php echo $all_data->full_name_english?></a> </p>
+							<p>&copy; copyright 2020. <a href="#" style="color:#fff;"><?php echo $all_data->full_name_english?></a> </p>
 						</div>
 						<div class="col-md-4">
 							<div>
 								<p>
 								Design & Developed by : 
-								<a href="http://www.datacenter.com.bd" target="_blank" style="color:#fff;">
-									Datacenter Bangladesh 
+								<a href="http://steptechbd.com/" target="_blank" style="color:#fff;">
+									Step Technology
 								</a>
 								</p >
 							</div>
@@ -151,3 +154,4 @@
 	</div><!-- Main Stop-->
 </body>
 </html>
+

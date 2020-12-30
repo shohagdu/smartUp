@@ -79,12 +79,20 @@
 		$perb_postof=	$pb_postof;
 	}
 	
-	if($profile=='') $profile=base_url().'img/default/profile.png'; // default img url...
+	//if($profile=='') $profile=base_url().'img/default/profile.png'; // default img url...
 	$trackid=$this->common->genaret_trackid(); 						// genaret_trackid..
 	$ftrackid=$this->web->conArray($trackid); 						// bangla track for message..
 	$dofb = date('Y-m-d',strtotime($dofb)); 						// change date formate..
-	$cDate=date("Y-m-d"); 											// current date .....
-	
+	$cDate=date("Y-m-d");
+	// current date .....
+     if(isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
+         $profile_info = $this->setup->uploadimage($_FILES['file']);
+     }elseif(!empty($old_profile) && empty($_FILES['file']['name'])){
+         $profile_info=$old_profile;
+     }else{
+         $profile_info='img/default/profile.png';
+     }
+
 	$data=array(
 		'trackid'		=> $trackid,
 		'delivery_type'	=> $delivery_type,
@@ -136,7 +144,7 @@
 		'mobile'		=> $mob,
 		'email'			=> $email,
 		'attachment'	=> $attachment,
-		'profile'		=> $profile,
+		'profile'		=> $profile_info,
 		'status'		=> '0',
 		'insert_time'	=> $cDate
 	);

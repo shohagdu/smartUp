@@ -9,48 +9,38 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading" style="font-weight: bold; font-size: 15px;background:#004884;text-align:center;">ট্রেড লাইসেন্স আবেদন</div>
 						<div class="panel-body all-input-form">
-							<form action="index.php/home/profile_upload" method="post" enctype="multipart/form-data" class="form-horizontal" name="upform" id="upform">
-								<div class="row"  style="margin-top: 10px;">
-									<div class="col-sm-12"> 
-										<div class="form-group">
-											<label for="Picture" class="col-sm-3 control-label">ছবি</label>
-											<div class="col-sm-5" style="margin-top:3px;">
-												<input type="file" name="file" class="form-control input-file-sm" />
-											</div>
-											<div class="col-sm-3" style="margin-top:3px;">
-												<button  onclick="return ajaxUpload(this.form,'index.php/home/profile_upload', '&lt;br&gt;Uploading image please wait.....&lt;br&gt;'); return false;" name='upload' class="btn btn-primary">আপলোড</button>
-											</div>
-											<div class="clearfix"> </div>
-										</div>
-									</div>
-								</div>
-							</form>
-						
 							<form action="index.php/home/tradelicenseapplication_action" method="post" id="defaultForm" enctype="multipart/form-data" class="form-horizontal">
-							
-								<div class="row"> 
-									<div class=" col-sm-offset-5 col-sm-7" id="UPLOAD">
-										
-									</div>
-								</div>
-								
-								<div class="row"> 
-									<div class="col-sm-12" style="margin-bottom:10px;margin-top:10px;"> 
-										<div class="form-group">
-											<label for="Delivery-type" class="col-sm-3 control-label">সরবরাহের ধরণ  <span>*</span></label>
-											<div class="col-sm-4">
-												<label class="radio-inline"><input type="radio" name="delivery_type" value="1">জরুরী</label>
-												<label class="radio-inline"><input type="radio" name="delivery_type" value="2" >অতি জরুরী  </label>
-												<label class="radio-inline"><input type="radio" name="delivery_type" value="3" checked="checked"> সাধারন</label>
-											</div>
-											<label for="Application-type" class="col-sm-2 control-label">আবেদনের ধরণ    <span>*</span></label>
-											<div class="col-sm-3">
-												<label class="radio-inline"><input type="radio" name="app_type" id="new_app" value="1" checked="checked">নতুন আবেদন</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								
+
+                                <div class="row"  style="margin-top: 10px;">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-9">
+                                                <label for="Picture" class="col-sm-6 control-label">ছবি</label>
+                                                <div class="col-sm-6" style="margin-top:3px;">
+                                                    <input type="file" name="file" class="form-control input-file-sm" accept="image/jpeg, image/jpg, image/png" onchange="LoadFile(event);" />
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <label for="Delivery-type" class="col-sm-6 control-label">সরবরাহের ধরণ  <span>*</span></label>
+                                                <div class="col-sm-6">
+                                                    <label class="radio-inline"><input type="radio" name="delivery_type" value="1">জরুরী</label>
+                                                    <label class="radio-inline"><input type="radio" name="delivery_type" value="2" >অতি জরুরী  </label>
+                                                    <label class="radio-inline"><input type="radio" name="delivery_type" value="3" checked="checked"> সাধারন</label>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <label for="Application-type" class="col-sm-6 control-label">আবেদনের ধরণ    <span>*</span></label>
+                                                <div class="col-sm-6">
+                                                    <label class="radio-inline"><input type="radio" name="app_type" id="new_app" value="1" checked="checked">নতুন আবেদন</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-3" id="img_div">
+                                                    <img src="<?php echo base_url('library/profile/default.jpg') ?>" class="img-thumbnail"  style="height: 100px" id="img_id">
+
+                                            </div>
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                    </div>
+                                </div>
 								<div class="row">
 									<div class="col-sm-12"> 
 										<div class="form-group">

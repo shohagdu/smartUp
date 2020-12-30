@@ -291,7 +291,7 @@
 							message: 'The Mobile Number is required'
 						},
 						regexp: {
-							regexp: /^(?:\+?88)?01[15-9]\d{8}$/,
+							regexp: /^(?:\+?88)?01[13-9]\d{8}$/,
 							message: 'Invalid mobile number'
 						},
 						numeric: {
@@ -360,12 +360,16 @@
 			var $form = $(e.target),
 				fv    = $form.data('formValidation');
 			// Use Ajax to submit form data
-			var u=$form.attr('action');
-			var u=$form.serialize();
+			// var u=$form.attr('action');
+			// var u=$form.serialize();
+			var formData = new FormData(this);
 			$.ajax({
 				url: $form.attr('action'),
 				type: 'POST',
-				data: $form.serialize(),
+				data: formData,
+				cache:false,
+				contentType: false,
+				processData: false,
 				beforeSend:function() { alert('sending----'); },
 				success: function(data) {
 					//var obj = JSON.parse(result);
@@ -588,3 +592,9 @@
 		jQuery('#rowNum'+rnum).remove();
 	}
 	/*====== other owner Add row functon end =========*/
+
+	var LoadFile = function (event) {
+		var output = document.getElementById("img_id");
+		document.getElementById("img_div").style.display = "block";
+		output.src = URL.createObjectURL(event.target.files[0]);
+	}

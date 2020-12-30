@@ -34,7 +34,10 @@ class Mms24 extends CI_Controller {
 			if($_POST){
 				$username=$this->input->post('username',TRUE);
 				$password=$this->input->post('password',TRUE);
-				$this->mlogin->loginInfo($username,$password);
+				$data=$this->mlogin->loginInfo($username,$password);
+				echo "<pre>";
+				print_r($data);
+				exit;
 			}
 			
 		}
@@ -63,9 +66,9 @@ class Mms24 extends CI_Controller {
 			
 		}
 		else{
-		$this->session->sess_destroy();
-		$page_data['content']=$this->load->view("login_content",true);
-		$this->load->view('login',$page_data);
+            $this->session->sess_destroy();
+            $page_data['content']=$this->load->view("login_content",true);
+            $this->load->view('login',$page_data);
 		}
 		/* $this->load->view('admin/loginMenu');
 		$this->load->view('admin/loginContent');

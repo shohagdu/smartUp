@@ -65,48 +65,48 @@
 		/*========== reday function start ===========*/
 		/*============== ajax request function start =========*/
 		$(document).ready(function(){
-			$('#nagorickInformationUpdate').submit(function() {
-				
-				var test = validationForm();
-				if(test){
-					$("#load").empty().append('<img src="library/img/ajaxloader.gif">');
-					$.post(
-					"index.php/Update/nagorickInfo",
-					$("#nagorickInformationUpdate").serialize(),
-					function(data){
-						if(data==1)
-						{
-							alert('আপনার আবেদনটি সঠিকভাবে পরিবর্তন করা হয়েছে');
-							setTimeout(function() {
-							window.location='Applicant/nagorickapplicant?napply=new';}, 1000)
-						} 
-						else if(data==2)
-						{
-							alert('দুঃখিত আপানর জাতিয় পরিচয়পত্র নং পূর্বে ব্যাবহার করা হয়েছে ');
-						}
-						else if(data==3)
-						{
-							alert('দুঃখিত আপানর জন্ম নিবধন নং পূর্বে ব্যাবহার করা হয়েছে ');
-						}
-						else if(data==4)
-						{
-							alert('দুঃখিত আপানর পাসপোর্ট নং পূর্বে ব্যাবহার করা হয়েছে ');
-						}
-						else if(data==6)
-						{
-							alert('দুঃখিত আপানর মোবাইল নাম্বারটি পূর্বে ব্যাবহার করা হয়েছে.');
-						}
-						else if(data==5)
-						{
-							alert('দয়া করে আপনার সঠিক মোবাইল নাম্বারটি ব্যাবহার করুন');
-						}
-						else{
-							alert(data);
-						}
-					});
-				}
-				return false;
-			});
+            $('#nagorickInformationUpdate').submit(function(e) {
+                var test = validationForm();
+                if(test) {
+                    $("#load").empty().append('<img src="library/img/ajaxloader.gif">');
+                    var $form = $(e.target),
+                        fv = $form.data('formValidation');
+                    var formData = new FormData(this);
+                    $.ajax({
+                        url: $form.attr('action'),
+                        type: 'POST',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        beforeSend: function () {
+                            alert('ধন্যবাদ! তথ্য  আপডেট এর কাজ চলমান....');
+                        },
+                        success: function (data) {
+                            if (data == 1) {
+                                alert('আপনার আবেদনটি সঠিকভাবে পরিবর্তন করা হয়েছে');
+                                setTimeout(function () {
+                                    window.location = 'Applicant/nagorickapplicant?napply=new';
+                                }, 1000)
+                            } else if (data == 2) {
+                                alert('দুঃখিত আপানর জাতিয় পরিচয়পত্র নং পূর্বে ব্যাবহার করা হয়েছে ');
+                            } else if (data == 3) {
+                                alert('দুঃখিত আপানর জন্ম নিবধন নং পূর্বে ব্যাবহার করা হয়েছে ');
+                            } else if (data == 4) {
+                                alert('দুঃখিত আপানর পাসপোর্ট নং পূর্বে ব্যাবহার করা হয়েছে ');
+                            } else if (data == 6) {
+                                alert('দুঃখিত আপানর মোবাইল নাম্বারটি পূর্বে ব্যাবহার করা হয়েছে.');
+                            } else if (data == 5) {
+                                alert('দয়া করে আপনার সঠিক মোবাইল নাম্বারটি ব্যাবহার করুন');
+                            } else {
+                                alert(data);
+                            }
+                        }
+                    });
+                }
+                return false;
+            });
+
 		});
 		/*============== ajax request function end =========*/
 		/*========== reday function  end===========*/
@@ -257,29 +257,22 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading" style="font-weight: bold; font-size: 15px;background:#004884;text-align:center;">আপনার তথ্য আপডেট করুন</div>
 				<div class="panel-body all-input-form">
-					<form action="Update/profile_upload" method="post" enctype="multipart/form-data" class="form-horizontal" name="upform" id="upform">
-						<div class="row"  style="margin-top: 10px;">
-							<div class="col-sm-12"> 
-								<div class="form-group">
-									<label for="Picture" class="col-sm-3 control-label">ছবি</label>
-									<div class="col-sm-5" style="margin-top:3px;">
-										<input type="file" name="file" class="form-control input-file-sm" />
-									</div>
-									<div class="col-sm-3" style="margin-top:3px;">
-										<button  onclick="return ajaxUpload(this.form,'Update/profile_upload', '&lt;br&gt;Uploading image please wait.....&lt;br&gt;'); return false;" name='upload' class="btn btn-primary">আপলোড</button>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-						</div>
-					</form>
-				
 					<form action="Update/nagorickInfo" method="post" id="nagorickInformationUpdate" enctype="multipart/form-data" class="form-horizontal">
-					
+                        <div class="row"  style="margin-top: 10px;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="Picture" class="col-sm-3 control-label">ছবি</label>
+                                    <div class="col-sm-5" style="margin-top:3px;">
+                                        <input type="file" name="file" onchange="loadFile(event)" class="form-control input-file-sm" />
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
 						<div class="row"> 
 							<div class=" col-sm-offset-3 col-sm-9" id="UPLOAD">
-								<img src="<?php echo $row->profile?>" width="180" height="170" class="img-thumbnail" />
-								<input type='hidden' name='profile' value='<?php echo $row->profile?>'/>
+								<img src="<?php echo $row->profile?>" id="image" width="180"  height="170" class="img-thumbnail" />
+								<input type='hidden' name='old_profile' value='<?php echo $row->profile?>'/>
 							</div>
 						</div>
 						

@@ -1,6 +1,7 @@
 <?php
 	extract($_POST);
-	//print_r($_POST);exit;
+//	echo "<pre>";
+//	print_r($_FILES);exit;
 	$uid=$this->input->post('uid',TRUE);	
 	if(trim($bname)=="" || trim($ename)==""){ echo "আপনার সকল সঠিক তথ্য প্রদান করুন";exit;}
 	
@@ -99,6 +100,15 @@
 		$bWname = "";
 	}
 
+	if(isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
+		 $profile_info = $this->setup->uploadimage($_FILES['file']);
+	}elseif(!empty($old_profile) && empty($_FILES['file']['name'])){
+		 $profile_info=$old_profile;
+	}else{
+		 $profile_info='img/default/profile.png';
+	}
+
+
 	$data=array(
 		'delivery_type'	=> $delivery_type,
 		'nationid'		=> $nationid,
@@ -149,7 +159,7 @@
 		'mobile'		=> $mob,
 		'email'			=> $email,
 		'attachment'	=> $attachment,
-		'profile'		=> $profile
+		'profile'		=> $profile_info
 	);
 	
 	$this->db->where('id',$uid);

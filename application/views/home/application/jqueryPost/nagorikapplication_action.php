@@ -1,5 +1,6 @@
  <?php
 	extract($_POST);
+
 	if(!isset($_POST['delivery_type'])){
 		echo "দয়া করে সরবরাহের  ধরণ নির্বাচন করুন";exit;
 	}
@@ -77,7 +78,9 @@
 		$perb_postof=	$pb_postof;
 	}
 	
-	if($profile=='') $profile=base_url().'img/default/profile.png'; // default img url...
+
+	$profile_info= !empty($_FILES['file'])? $this->setup->uploadimage($_FILES['file']):'img/default/profile.png';
+
 	$trackid=$this->common->genaret_trackid(); 						// genaret_trackid..
 	$ftrackid=$this->web->conArray($trackid); 						// bangla track for message..
 	$dofb = date('Y-m-d',strtotime($dofb)); 						// change date formate..
@@ -134,7 +137,7 @@
 		'mobile'		=> $mob,
 		'email'			=> $email,
 		'attachment'	=> $attachment,
-		'profile'		=> $profile,
+		'profile'		=> $profile_info,
 		'status'		=> '0',
 		'insert_time'	=> $cDate
 	);

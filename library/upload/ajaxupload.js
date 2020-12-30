@@ -1,5 +1,4 @@
-﻿<!--
-<!--
+﻿
 function disableForm(theform) {
     if (document.all || document.getElementById) {
         for (i = 0; i < theform.length; i++) {

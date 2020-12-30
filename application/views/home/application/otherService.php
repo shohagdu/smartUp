@@ -1,9 +1,9 @@
 <link href="all/custom_js/application_form.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript"> 
 	/*========== reday function start ===========*/
-	$(document).reday(function(){
-		onload_hide_fun();
-	});
+	// $(document).reday(function(){
+	// 	onload_hide_fun();
+	// });
 	/*========== reday function  end===========*/
 </script>
 <?php 
@@ -17,61 +17,55 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading" style="font-weight: bold; font-size: 15px;background:#004884;text-align:center;"><?php echo $title;?> এর জন্য আবেদন ফরম</div>
 						<div class="panel-body all-input-form">
-							<form action="index.php/home/profile_upload" method="post" enctype="multipart/form-data" class="form-horizontal" name="upform" id="upform">
-								<div class="row"  style="margin-top: 10px;">
-									<div class="col-sm-12"> 
-										<div class="form-group">
-											<label for="Picture" class="col-sm-3 control-label">ছবি</label>
-											<div class="col-sm-5" style="margin-top:3px;">
-												<input type="file" name="file" class="form-control input-file-sm" />
-											</div>
-											<div class="col-sm-3" style="margin-top:3px;">
-												<button  onclick="return ajaxUpload(this.form,'index.php/home/profile_upload', '&lt;br&gt;Uploading image please wait.....&lt;br&gt;'); return false;" name='upload' class="btn btn-primary">আপলোড</button>
-											</div>
-											<div class="clearfix"> </div>
-										</div>
-									</div>
-								</div>
-							</form>
-						
-							<form action="index.php/home/otherService_action" method="post" id="defaultForm" class="form-horizontal">
-							
-								<div class="row"> 
-									<div class=" col-sm-offset-5 col-sm-7" id="UPLOAD">
-										
-									</div>
-								</div>
-								
-								<div class="row">
-									<div class="col-sm-12" style="margin-bottom:10px;margin-top:10px;"> 
-										<div class="form-group"> 
-											<label for="Service List" class="col-sm-3 control-label"> সেবা সমহু  <span>*</span></label>
-											<div class="col-sm-3">
-												<select name="" id="" class="form-control" required disabled >
-													<option value="">চিহ্নিত করুন</option>
-													<?php 
-														$qy = $this->db->select("id,listName")->from("otherservicelist")->where("status",1)->order_by("id","asc")->get()->result();
-														foreach($qy as $serviceInfo):
-													?>
-														<option value="<?php echo $serviceInfo->id;?>" <?php if($serviceInfo->id == $service): echo "selected"; endif;?>><?php echo $serviceInfo->listName;?></option>
-													<?php 
-														endforeach;
-													?>
-												</select>
-											</div>
-											<label for="Delivery-type" class="col-sm-3 control-label"> সরবরাহের ধরণ  <span>*</span></label>
-											<div class="col-sm-3">
-												<select name="delivery_type" id="delivery_type" class="form-control" required >
-													<option value="2">অতি জরুরী </option>
-													<option value="1">জরুরী</option>
-													<option value="3" selected>সাধারন</option>
-													
-												</select>
-											</div>
-											
-										</div>
-									</div>
-								</div>
+							<form action="index.php/home/otherService_action" method="post" enctype="multipart/form-data" id="defaultForm" class="form-horizontal">
+                                <div class="row"  style="margin-top: 10px;">
+                                    <div class="col-sm-12">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <label for="Picture" class="col-sm-6 control-label">ছবি</label>
+                                                <div class="col-sm-6" style="margin-top:3px;">
+                                                    <input type="file" name="file" class="form-control input-file-sm" accept="image/jpeg, image/jpg, image/png" onchange="LoadFile(event);" />
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="form-group">
+                                                <label for="Service List" class="col-sm-6 control-label"> সেবা সমহু  <span>*</span></label>
+                                                <div class="col-sm-6">
+                                                    <select name="" id="" class="form-control" required disabled >
+                                                        <option value="">চিহ্নিত করুন</option>
+                                                        <?php
+                                                        $qy = $this->db->select("id,listName")->from("otherservicelist")->where("status",1)->order_by("id","asc")->get()->result();
+                                                        foreach($qy as $serviceInfo):
+                                                            ?>
+                                                            <option value="<?php echo $serviceInfo->id;?>" <?php if($serviceInfo->id == $service): echo "selected"; endif;?>><?php echo $serviceInfo->listName;?></option>
+                                                        <?php
+                                                        endforeach;
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="form-group">
+                                                <label for="Delivery-type" class="col-sm-6 control-label"> সরবরাহের ধরণ  <span>*</span></label>
+                                                <div class="col-sm-6">
+                                                    <select name="delivery_type" id="delivery_type" class="form-control" required >
+                                                        <option value="2">অতি জরুরী </option>
+                                                        <option value="1">জরুরী</option>
+                                                        <option value="3" selected>সাধারন</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3" id="img_div">
+                                            <img src="<?php echo base_url('library/profile/default.jpg') ?>" class="img-thumbnail"  style="height: 100px" id="img_id">
+                                        </div>
+                                        <div class="clearfix"> </div>
+
+                                    </div>
+                                </div>
 								<?php 
 									if($service==13){
 										$possoPart='display: block;';
@@ -791,7 +785,7 @@
 			</div><!-- row end--->
 		</div><!-- left Content End-->
 		
-		<script src="all/custom_js/otherService_form.js" type="text/javascript"></script>
+		<script src="all/custom_js/otherService_form.js?v=1" type="text/javascript"></script>
 <style type="text/css"> 
 .sub-hints{
 	font-size: 12px;

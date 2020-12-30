@@ -1,6 +1,6 @@
 <?php
 	extract($_POST);
-	//print_r($_POST);exit;
+//	print_r($_POST);exit;
 	$uid=$this->input->post('uid',TRUE);	
 	if(trim($bname)=="" || trim($ename)==""){ echo "আপনার সকল সঠিক তথ্য প্রদান করুন";exit;}
 	if(trim($mob)==""){echo "দয়া করে আপনার মোবাইল নাম্বারটি প্রবেশ করুন";exit;}
@@ -104,7 +104,13 @@
 		$eWname = "";
 		$bWname = "";
 	}
-
+	if(isset($_FILES['file']['name']) && !empty($_FILES['file']['name'])) {
+		$profile_info = $this->setup->uploadimage($_FILES['file']);
+	}elseif(!empty($profile) && empty($_FILES['file']['name'])){
+		$profile_info=$profile;
+	}else{
+		$profile_info='img/default/profile.png';
+	}
 	$data=array(
 		'delivery_type'	=> $delivery_type,
 		'serviceId'		=> $serviceList,
@@ -166,7 +172,7 @@
 		'mobile'		=> $mob,
 		'email'			=> $email,
 		'attachment'	=> $attachment,
-		'profile'		=> $profile
+		'profile'		=> $profile_info
 	);
 	
 	$this->db->where('id',$uid);

@@ -10,6 +10,8 @@
 			}
 			$password = md5($password);
 			$query=$this->db->query("SELECT id,username,fullname,mobile,email,security_setting,verify_mobile,verify_email,question_id,MD5(UNIX_TIMESTAMP() + id +RAND(UNIX_TIMESTAMP())) sid FROM admin WHERE username='$username' AND pass='$password'");
+		//	return $this->db->last_query();
+
 			$login=$query->num_rows();
 			if($login!='1'){
 				redirect('mms24?sk=invalid','location');
@@ -43,6 +45,8 @@
 					'log_id'=>$log_id
 					//'logged_status'=>TRUE
 				);
+
+
 				$this->session->set_userdata($data);
 				if($row->security_setting=='1' && $row->verify_mobile=='1' && strlen($row->question_id)>2){
 					redirect('Security','location');

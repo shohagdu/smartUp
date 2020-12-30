@@ -1,10 +1,11 @@
 <link href="all/custom_js/application_form.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript"> 
 	/*========== reday function start ===========*/
-	$(document).reday(function(){
-		onload_hide_fun();
-	});
+	// $(document).reday(function(){
+	// 	onload_hide_fun();
+	// });
 	/*========== reday function  end===========*/
+
 </script>
 <div class="main_con"><!--Content Start-->
 	<div class="row"><!--- row start--->
@@ -14,43 +15,35 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading" style="font-weight: bold; font-size: 15px;background:#004884;text-align:center;">নাগরিক আবেদন</div>
 						<div class="panel-body all-input-form">
-							<form action="index.php/home/profile_upload" method="post" enctype="multipart/form-data" class="form-horizontal" name="upform" id="upform">
-								<div class="row"  style="margin-top: 10px;">
-									<div class="col-sm-12"> 
-										<div class="form-group">
-											<label for="Picture" class="col-sm-3 control-label">ছবি</label>
-											<div class="col-sm-5" style="margin-top:3px;">
-												<input type="file" name="file" class="form-control input-file-sm" />
-											</div>
-											<div class="col-sm-3" style="margin-top:3px;">
-												<button  onclick="return ajaxUpload(this.form,'index.php/home/profile_upload', '&lt;br&gt;Uploading image please wait.....&lt;br&gt;'); return false;" name='upload' class="btn btn-primary">আপলোড</button>
-											</div>
-											<div class="clearfix"> </div>
-										</div>
-									</div>
-								</div>
-							</form>
-						
-							<form action="index.php/home/nagorikapplication_action" method="post" id="defaultForm" class="form-horizontal">
-							
-								<div class="row"> 
-									<div class=" col-sm-offset-5 col-sm-7" id="UPLOAD">
-										
-									</div>
-								</div>
-								
-								<div class="row"> 
-									<div class="col-sm-12" style="margin-bottom:10px;margin-top:10px;"> 
-										<div class="form-group">
-											<label for="Delivery-type" class="col-sm-3 control-label">সরবরাহের ধরণ  <span>*</span></label>
-											<div class="col-sm-9">
-												<label class="radio-inline"><input type="radio" name="delivery_type" value="1" >জরুরী</label>
-												<label class="radio-inline"><input type="radio" name="delivery_type" value="2">অতি জরুরী  </label>
-												<label class="radio-inline"><input type="radio" name="delivery_type" value="3" checked="checked"> সাধারন</label>
-											</div>
-										</div>
-									</div>
-								</div>
+							<form action="index.php/home/nagorikapplication_action"  method="post" id="defaultForm" class="form-horizontal" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label for="National-id-english" class="col-sm-6 control-label">ছবি  </label>
+                                            <div class="col-sm-6">
+                                                <input type="file" name="file" accept="image/jpeg, image/jpg, image/png" onchange="LoadFile(event);" class="form-control input-file-sm" />
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="form-group">
+                                            <label for="Delivery-type" class="col-sm-6 control-label">সরবরাহের ধরণ  <span>*</span></label>
+                                            <div class="col-sm-6">
+                                                <label class="radio-inline"><input type="radio" name="delivery_type" value="1" >জরুরী</label>
+                                                <label class="radio-inline"><input type="radio" name="delivery_type" value="2">অতি জরুরী  </label>
+                                                <label class="radio-inline"><input type="radio" name="delivery_type" value="3" checked="checked"> সাধারন</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="Birth-no" class="col-sm-6 control-label"></label>
+                                            <div class="col-sm-6" id="img_div">
+                                                <img src="<?php echo base_url('library/profile/default.jpg') ?>" class="img-thumbnail" style="height: 100px" id="img_id">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
 								
 								<div class="row">
 									<div class="col-sm-6"> 

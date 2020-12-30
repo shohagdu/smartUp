@@ -9,30 +9,24 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading" style="font-weight: bold; font-size: 15px;background:#004884;text-align:center;">অন্যান্য সনদ এর জন্য আবেদন ফরম</div>
 				<div class="panel-body all-input-form">
-					<form action="index.php/home/profile_upload" method="post" enctype="multipart/form-data" class="form-horizontal" name="upform" id="upform">
-						<div class="row"  style="margin-top: 10px;">
-							<div class="col-sm-12"> 
-								<div class="form-group">
-									<label for="Picture" class="col-sm-3 control-label">ছবি</label>
-									<div class="col-sm-5" style="margin-top:3px;">
-										<input type="file" name="file" class="form-control input-file-sm" />
-									</div>
-									<div class="col-sm-3" style="margin-top:3px;">
-										<button  onclick="return ajaxUpload(this.form,'index.php/home/profile_upload', '&lt;br&gt;Uploading image please wait.....&lt;br&gt;'); return false;" name='upload' class="btn btn-primary">আপলোড</button>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-						</div>
-					</form>
+
 				
 					<form action="index.php/Applicant/otherserviceapplication_action" method="post" id="defaultForm" class="form-horizontal">
-					
-						<div class="row"> 
-							<div class=" col-sm-offset-5 col-sm-7" id="UPLOAD">
-								
-							</div>
-						</div>
+
+                        <div class="row"  style="margin-top: 10px;">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="Picture" class="col-sm-3 control-label">ছবি</label>
+                                    <div class="col-sm-5" style="margin-top:3px;">
+                                        <input type="file" name="file" class="form-control input-file-sm" />
+                                    </div>
+                                    <div class="col-sm-4" id="UPLOAD">
+                                        <img src="<?php echo base_url('library/profile/default.jpg') ?>" id="image" width="180"  height="170" class="img-thumbnail" />
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
 						
 						<div class="row">
 							<div class="col-sm-12" style="margin-bottom:10px;margin-top:10px;"> 

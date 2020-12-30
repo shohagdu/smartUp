@@ -405,7 +405,7 @@
 							message: 'The Mobile Number is required'
 						},
 						regexp: {
-							regexp: /^(?:\+?88)?01[15-9]\d{8}$/,
+							regexp: /^(?:\+?88)?01[13-9]\d{8}$/,
 							message: 'Invalid mobile number'
 						},
 						numeric: {
@@ -470,12 +470,16 @@
 			var $form = $(e.target),
 				fv    = $form.data('formValidation');
 			// Use Ajax to submit form data
-			var u=$form.attr('action');
-			var u=$form.serialize();
+			// var u=$form.attr('action');
+			// var u=$form.serialize();
+			var formData = new FormData(this);
 			$.ajax({
 				url: $form.attr('action'),
 				type: 'POST',
-				data: $form.serialize(),
+				data: formData,
+				cache:false,
+				contentType: false,
+				processData: false,
 				beforeSend:function() { alert('sending----'); },
 				success: function(result) {
 					//var obj = JSON.parse(result);
@@ -649,10 +653,10 @@
 		$("#only_mukti_part").hide();
 		$("#husband").hide();
 		$("#print").hide();
-		$(".bname").bnKb({
-			'switchkey': {"webkit":"k","mozilla":"y","safari":"k","chrome":"k","msie":"y"},
-			'driver': phonetic
-		});
+		// $(".bname").bnKb({
+		// 	'switchkey': {"webkit":"k","mozilla":"y","safari":"k","chrome":"k","msie":"y"},
+		// 	'driver': phonetic
+		// });
 	}
 	/*=========onload function end=============*/
 	
@@ -690,4 +694,10 @@
 			$("#only_mukti_part").hide();
 			$("#only_mukti_part input:text").val('');
 		}
+	}
+
+	var LoadFile = function (event) {
+		var output = document.getElementById("img_id");
+		document.getElementById("img_div").style.display = "block";
+		output.src = URL.createObjectURL(event.target.files[0]);
 	}

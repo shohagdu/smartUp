@@ -1,11 +1,11 @@
 	</div> <!----end row----->
 	<footer class="row" style="margin-top: 10px;margin-bottom: 5px;">
-		<p class="col-md-9 col-sm-9 col-xs-12 copyright"><a href="javascript: void(0);" target="">সাপোর্ট নাম্বার - ০১৮৬০৩১২৬৯৪ , ইমেইল- sozib@datacenter.com.bd, Fb: https://www.facebook.com/mohammadsozib.ferdous   </a></p>
+		<p class="col-md-9 col-sm-9 col-xs-12 copyright"><a href="javascript: void(0);" target="">সাপোর্ট নাম্বার - +৮৮০ ১৬৭২ ৭৫৮০৮৪, +৮৮০ ০১৬৭৩ ০৫০৫০৭, Email: info@steptechbd.com   </a></p>
 
-		<p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a href="javascript:void(0)">Datacenter Bangladesh</a></p>
+		<p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a href="javascript:void(0)">Steptechbd.com</a></p>
 	</footer>
 </div><!--/.fluid-container-->
-
+<!-- index.php/Setup/updatesetupform -->
 <!-- external javascript -->
 
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

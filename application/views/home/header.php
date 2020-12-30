@@ -7,40 +7,49 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<base href="<?php echo base_url();?>"></base>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+
+
 	<link rel="shortcut icon" href="pori/favicon.ico" type="image/x-icon" />
 	<title><?php echo $all_data->full_name;?></title>
 <!-- all css file---->	
-    <link href="all/assets/css/leapis_font.css" rel="stylesheet" type="text/css">
-	<link href="all/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="all/assets/css/style.css" rel="stylesheet" type="text/css">
-    <link href="all/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>all/assets/css/leapis_font.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo base_url(); ?>all/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>all/assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>all/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <!-- all script file -->
-	<script src="all/assets/js/bootstrap.js"></script>
-	<script src="all/assets/js/jquery-1.10.2.js"></script>
-	<script src="all/assets/js/bootstrap-hover-dropdown.js"></script>
-	<script src="all/assets/js/bootstrap.min.js"></script>
-	<script src="all/assets/js/jquery.min.js"></script>
-	
+	<script src="<?php echo base_url(); ?>all/assets/js/bootstrap.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
+	<script src="<?php echo base_url(); ?>all/assets/js/jquery-1.10.2.js"></script>
+<!--    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>-->
+	<script src="<?php echo base_url(); ?>all/assets/js/bootstrap-hover-dropdown.js"></script>
+	<script src="<?php echo base_url(); ?>all/assets/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url(); ?>all/assets/js/jquery.min.js"></script>
+
+    <!-- jquery -->
+
+
 	
 <!--- form validation js and css---->
 	<!---<link rel="stylesheet" href="validation/css/bootstrap.css"/>-->
-    <link rel="stylesheet" href="validation/css/formValidation.css"/>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>validation/css/formValidation.css"/>
 
     <!---<script type="text/javascript" src="validation/js/jquery.min.js"></script>---->
     <!---<script type="text/javascript" src="validation/js/bootstrap.min.js"></script>-->
-    <script type="text/javascript" src="validation/js/formValidation.js"></script>
-    <script type="text/javascript" src="validation/js/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="<?php echo base_url(); ?>validation/js/formValidation.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>validation/js/js/bootstrap.js"></script>
 	
 	<!--- for datepicker ----------->
-	<link href="datepicker/jquery-ui.css" rel="stylesheet" media="screen,projection" type="text/css" />
-	<script src="datepicker/jquery-ui.js"></script>
+	<link href="<?php echo base_url(); ?>datepicker/jquery-ui.css" rel="stylesheet" media="screen,projection" type="text/css" />
+	<script src="<?php echo base_url(); ?>datepicker/jquery-ui.js"></script>
 	<!--<script src="datepicker/jquery-1.9.1.js"></script>--> 
 	
 	<!-- for bootstrap datepicker ------->
-	<link href="datepicker/bootstrap3/css/datepicker.min.css" rel="stylesheet" media="screen,projection" type="text/css" />
-	<link href="datepicker/bootstrap3/css/datepicker3.min.css" rel="stylesheet" media="screen,projection" type="text/css" />
-	<script src="datepicker/bootstrap3/js/bootstrap-datepicker.min.js"></script>
-	
+	<link href="<?php echo base_url(); ?>datepicker/bootstrap3/css/datepicker.min.css" rel="stylesheet" media="screen,projection" type="text/css" />
+	<link href="<?php echo base_url(); ?>datepicker/bootstrap3/css/datepicker3.min.css" rel="stylesheet" media="screen,projection" type="text/css" />
+	<script src="<?php echo base_url(); ?>datepicker/bootstrap3/js/bootstrap-datepicker.min.js"></script>
+
 	<script>
 		$(function() {
 			var pickerOpts = {
@@ -52,15 +61,15 @@
 <!-- end all script -->
 
     <!-- Owl Carousel Assets -->
-    <link href="owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="owl-carousel/owl.theme.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>owl-carousel/owl.theme.css" rel="stylesheet">
 	
 	<!--- picture uplaod js ---->
-	<script src="library/upload/ajaxupload.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>library/upload/ajaxupload.js" type="text/javascript"></script>
 	
 	<!--- ajax request function for data serching----->
-	<script src="library/ajax_req.js" type="text/javascript"></script>
-	
+	<script src="<?php echo base_url(); ?>library/ajax_req.js" type="text/javascript"></script>
+</head>
 	
 	<style>
 		body{color:font-family:solaimanlipi, "Times New Roman", Times, serif !important; color:black !important;}

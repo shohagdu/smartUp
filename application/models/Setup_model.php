@@ -691,4 +691,20 @@ class Setup_model extends CI_Model{
 			return ['status' => 'error', 'message' => 'Information not found', 'data'=> null];
 		}	
 	}
+    public  function uploadimage($image){
+
+        $ext =  pathinfo($image['name'],PATHINFO_EXTENSION);
+        $imageName=time().rand(10000 , 99999 ).".".$ext;
+        $this->load->library('image_lib');
+        $config['image_library'] = 'gd2';
+        $config['source_image']	= $image['tmp_name'];
+        $config['create_thumb'] = false;
+        $config['maintain_ratio'] = TRUE;
+        $config['height']	= "300";
+//        $config['width'] = "300";
+        $config['new_image'] = "library/profile/".$imageName;//you should have write permission here..
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+        return $config['new_image'];
+    }
 }
