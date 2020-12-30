@@ -119,7 +119,7 @@
 					if(data==1)
 					{
 						alert('Update Successfully');
-						window.location="index.php/Manage/webSiteUpMembterAdd";
+						window.location="index.php/Setup/updatesetupform";
 					}
 					else if(data==2)
 					{
