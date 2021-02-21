@@ -1,0 +1,13 @@
+[31-Dec-2020 00:26:37 Asia/Dhaka] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to CI_Exceptions::show_exception() must be an instance of Exception, instance of Error given, called in /home/steptechbd/public_html/smartUp/system/core/Common.php on line 662 and defined in /home/steptechbd/public_html/smartUp/system/core/Exceptions.php:190
+Stack trace:
+#0 /home/steptechbd/public_html/smartUp/system/core/Common.php(662): CI_Exceptions->show_exception(Object(Error))
+#1 [internal function]: _exception_handler(Object(Error))
+#2 {main}
+  thrown in /home/steptechbd/public_html/smartUp/system/core/Exceptions.php on line 190
+[31-Dec-2020 00:27:47 Asia/Dhaka] PHP Fatal error:  Call to undefined function mysqli_init() in /home/steptechbd/public_html/smartUp/system/database/drivers/mysqli/mysqli_driver.php on line 125
+[31-Dec-2020 00:28:10 Asia/Dhaka] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to CI_Exceptions::show_exception() must be an instance of Exception, instance of Error given, called in /home/steptechbd/public_html/smartUp/system/core/Common.php on line 662 and defined in /home/steptechbd/public_html/smartUp/system/core/Exceptions.php:190
+Stack trace:
+#0 /home/steptechbd/public_html/smartUp/system/core/Common.php(662): CI_Exceptions->show_exception(Object(Error))
+#1 [internal function]: _exception_handler(Object(Error))
+#2 {main}
+  thrown in /home/steptechbd/public_html/smartUp/system/core/Exceptions.php on line 190
