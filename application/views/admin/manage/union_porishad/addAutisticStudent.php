@@ -177,7 +177,7 @@
 		jQuery('#rowNum'+rnum).remove();
 	}
 </script>
-<script type="text/javascript"> <!--------this is for Client Search ------>
+<script type="text/javascript">
 	$("document").ready(function(){
 		$("#n_id").keyup(function(){
 			var n_id=$("#n_id").val();

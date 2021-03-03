@@ -66,6 +66,17 @@
 								?>
                             </ul>
                         </li>
+                        <li class="accordion">
+                            <a href="javascript:void(0);"><i class="glyphicon glyphicon-tags"></i><span> &nbsp;খাদ্য বান্ধব কর্মসূচি</span> &nbsp;<i class="glyphicon glyphicon-chevron-down"></i></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="FoodController" >আবেদনকারীগন </a></li>
+                                <li><a href="FoodController/foodCollection"> খাদ্য সংগ্রহ </a></li>
+                                <li><a href="FoodController/foodProgram">কর্মসূচি সমূহ </a></li>
+                                <li><a href="FoodController/issuingAuthority">ইস্যুকারীর তথ্য</a></li>
+                                <li><a href="FoodController/dealerInfo">ডিলারের তথ্য</a></li>
+                                <li><a href="FoodController/foodReport">রিপোর্ট</a></li>
+                            </ul>
+                        </li>
 						<li>
 							<a class="ajax-link" href="Admin/mamlaNotice">
 								<i class="glyphicon glyphicon-tags"></i> &nbsp;

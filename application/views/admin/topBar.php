@@ -51,7 +51,8 @@
 	
 	<!--- picture uplaod js ---->
 	<script type="text/javascript" src="library/upload/ajaxupload.js"></script>
-	
+	<script type="text/javascript" src="assets/sweet_alert/sweetalert.min.js"></script>
+
 	
 	<!--- coustom css--------->
 	<link rel="stylesheet" href="css/custom.css" class="css" />
@@ -61,7 +62,9 @@
 	
 	<!--- ajax request function for data serching----->
 	<script type="text/javascript" src="library/ajax_req.js"></script>
-	
+    <!--- Custom js----->
+    <script type="text/javascript" src="library/customize.js"></script>
+
 	<!-- for bootstrap Validate--------->
 	<link rel="stylesheet" href="validation/css/formValidation.css"/>
 	<script type="text/javascript" src="validation/js/formValidation.js"></script>
