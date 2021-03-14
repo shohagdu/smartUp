@@ -74,7 +74,8 @@
                                 <li><a href="FoodController/foodProgram">কর্মসূচি সমূহ </a></li>
                                 <li><a href="FoodController/issuingAuthority">ইস্যুকারীর তথ্য</a></li>
                                 <li><a href="FoodController/dealerInfo">ডিলারের তথ্য</a></li>
-                                <li><a href="FoodController/foodReport">রিপোর্ট</a></li>
+                                <li><a  href="DailyReports/foodApplicantReport" target="_blank">রিপোর্ট আবেদনকারীগন </a></li>
+                                <li><a href="DailyReports/foodCollectionReport" target="_blank">রিপোর্ট খাদ্য সংগ্রহ</a></li>
                             </ul>
                         </li>
 						<li>

@@ -1,0 +1,160 @@
+body{
+    background-color:#D3D3D3;
+    font-family:solaimanLipi;
+    margin:0;
+    padding:0;
+    font-size:14px;
+    font-style:normal;
+    font-weight:normal;
+}
+
+#main{
+    height:11.9in;
+    width:8.3in;
+    background-color:white;
+    margin:0px auto;
+    border:0px solid green;
+    overflow:visible;
+}
+
+#main_second{
+    height:11.7in;
+    width:8.3in;
+    float:left;
+    position:relative;
+    box-sizing: border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+
+
+table.muri_table tr td input{
+    border:none;
+    background:none;
+}
+
+.owarishhead{
+    text-align:center;
+    width:90px;
+    height:20px;
+    margin:0px auto;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    font-size: 14px;
+    line-height: 21px;
+    color:white;
+    font-style:normal;
+    padding:1px;
+    background:pink;
+    position:relative;
+    box-sizing:border-box;
+
+}
+.owarishheadEng{
+    text-align:center;
+    width:120px;
+    height:20px;
+    font-size: 12px;
+    line-height: 20px;
+    margin:0px auto;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    color:white;
+    font-style:normal;
+    padding:1px;
+    background:pink;
+    position:relative;
+    box-sizing:border-box;
+    line-height:20px;
+
+}
+.wrapper{
+    border: 9px solid transparent;
+    margin:0 auto;
+    border-image: url(../assets/img/border-image/border.png) 20% round;
+    height:11.6in;
+    width:8.1in;
+    position: relative;
+    background-size:70%;
+    outline:4px solid #1C5A03;
+
+}
+.jolchap {
+    background: url(../site_image/logo_bd3.png)no-repeat center;
+    padding-bottom: 15px;
+    background-size:85%;
+}
+
+
+#cert{
+    height:10.7in;
+    width:8.2in;
+    float:left;
+    position: relative;
+    border:0px solid red;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+
+#header{
+    width:800px;
+    float:left;
+    padding:5px;
+    padding-right:10px;
+    padding-top:0px;
+    border:0px solid;
+
+}
+
+#second_topline{
+    height:42px;
+    width:788px;
+    float:right;
+    border:0px solid;
+    font-size:30px;
+    margin-left:50px;
+    text-align:center;
+    padding-top:5px;
+    border-bottom:0px;
+}
+#sonod_number{
+    height:30px;
+    width:8.2in;
+    float:left;
+}
+
+/*  - For Print
+------------------------------------------------------*/
+.print-certificate {
+    width: 77px;
+    height: 76px;
+    position: fixed;
+    padding: 5px;
+    bottom: 30px;
+    right: 30px;
+    color: #ffffff;
+    font-size: 2em;
+    text-align: center;
+    line-height: 36px;
+    background-color: #D3D3D3;
+    -moz-border-radius: 6px 20px 6px 20px;
+    -webkit-border-radius: 6px 20px 6px 20px;
+    border-radius: 6px 20px 6px 20px;
+    z-index: 9999;
+}
+.print-certificate img{
+    width: 70px;
+    height: 70px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+@media all and (max-width: 1065px) {
+    #print-full-page {
+        display:none;
+    }
+}
+/*  - For Print End
+------------------------------------------------------*/

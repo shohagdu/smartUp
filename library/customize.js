@@ -1,3 +1,6 @@
+$(function() {
+    $(".dateFormatDate").datepicker({ dateFormat: 'dd-mm-yy' });
+});
 function verifyNIDInfo(){
     var NiD=$("#n_id").val();
     $.ajax({
@@ -7,6 +10,7 @@ function verifyNIDInfo(){
         dataType:'JSON',
         //beforeSend:function() { alert('sending----'); },
         success: function(result) {
+            console.log(result);
             if(result.status == 'error'){
                 $('#errorMessage').fadeIn('slow').delay(5000).fadeOut('slow');
                 $('#errorText').text(result.message);
@@ -52,7 +56,7 @@ var LoadFile = function (event) {
     output.src = URL.createObjectURL(event.target.files[0]);
 }
 $(document).ready(function (e) {
-    $("#fixedInputTest").on('submit',(function(e) {
+    $("#foodApplicnatInfoForm").on('submit',(function(e) {
         $("#submitBtn").attr('disabled',true);
         var formData = new FormData(this)
         e.preventDefault();
@@ -75,8 +79,13 @@ $(document).ready(function (e) {
                     $('#error_output').html(error_html);
                 } else {
                     $('#error_output').html('');
-                    alert(data.success);
-                    window.location=data.redirect_page;
+                    swal({
+                        text: data.success,
+                        icon: "success",
+                    }).then(function () {
+                        window.location=data.redirect_page;
+                    });
+
                 }
             }
         });
@@ -86,20 +95,38 @@ $(document).ready(function (e) {
 $(document).ready(function(){
     $('#exampleNew').dataTable();
 
-    var dataTable = $('#food_distribute_applicant_data').DataTable({
+    var distribute_applicant_data_dataTable = $('#food_distribute_applicant_data').DataTable({
         "processing":true,
         "serverSide":true,
         "order":[],
         "ajax":{
             url:"FoodController/applicantInfo",
-            type:"POST"
+            type:"POST",
+            'data': function(data){
+                data.dealer_id = $('#dealer_id').val();
+            }
         },
+        'columns': [
+            { data: 'slNo' },
+            { data: 'img' },
+            { data: 'applicant_id' },
+            { data: 'card_no' },
+            { data: 'nid' },
+            { data: 'name' },
+            { data: 'father_name' },
+            { data: 'mobile' },
+            { data: 'dealerName' },
+            { data: 'action' },
+        ],
         "columnDefs":[
             {
                 "targets":[0, 3, 4],
                 "orderable":false,
             },
         ],
+    });
+    $('#dealer_id').change(function(){
+        distribute_applicant_data_dataTable.draw();
     });
 });
 // Food Program
@@ -285,3 +312,200 @@ function DeleteAuthorityInfo(id) {
         }
     });
 }
+
+
+
+// Food Collection information update
+function addFoodReceiveInfo(){
+    $("#foodCollectionForm")[0].reset();
+    $("#saveBtnLevel").html('Save');
+    $('.output_error').html('');
+    $("#statuDiv").hide();
+}
+
+$(document).on("keyup.autocomplete","#foodApplicantNameLabel",function(){
+    var options = {
+        source: function (request, response) {
+            $.ajax({
+                url: "FoodController/getApplicantInfo",
+                method: 'GET',
+                dataType: "json",
+                autoFocus:true,
+                data: {
+                    q: request.term,
+                },
+                success: function (data) {
+                    response(data);
+                }
+            });
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            if(ui.item.value !='') {
+                $('#foodApplicantNameLabel').val(ui.item.label);
+                $('#foodApplicantName').val(ui.item.value);
+                    var applicantID=ui.item.value;
+                    $.ajax({
+                        type: "POST",
+                        url: "FoodController/get_single_applicant_info",
+                        data: {id: applicantID},
+                        'dataType': 'json',
+                        success: function (response) {
+                            if (response.status == 'success') {
+                                console.log(response);
+                            } else {
+
+                            }
+                        }
+                    });
+
+            }else{
+                $('#foodApplicantNameLabel').val('');
+                $('#foodApplicantName').val('');
+            }
+            return false;
+        }
+    };
+    $('body').on('keyup.autocomplete', "#foodApplicantNameLabel", function() {
+        $(this).autocomplete(options);
+    });
+});
+
+
+function updateFoodCollectionInfo() {
+    $.ajax({
+        type: "POST",
+        url: "FoodController/updateFoodCollectionInfo",
+        data: $('#foodCollectionForm').serialize(),
+        'dataType': 'json',
+        success: function (data) {
+            if (data.error.length > 0) {
+                var error_html = '';
+                for (var count = 0; count < data.error.length; count++) {
+                    error_html += '<div class="alert alert-danger">' + data.error[count] + '</div>';
+                }
+                $('.output_error').html(error_html);
+            } else {
+                $('.output_error').html('');
+                swal({
+                    text: data.success,
+                    icon: "success",
+                }).then(function () {
+                    location.reload();
+                });
+
+            }
+        }
+    });
+}
+
+function editFoodCollectionInfo(id){
+    $("#foodCollectionForm")[0].reset();
+    $(".output_error").html('');
+    $("#saveBtnLevel").html('Update');
+    $("#statuDiv").show();
+    $.ajax({
+        type: "POST",
+        url: "FoodController/getFoodCollectionInfo",
+        data: {id:id},
+        'dataType': 'json',
+        success: function (data) {
+            if (data.status = 'success') {
+                var info=data.data;
+                console.log(info);
+                $("#foodApplicantName").val(info.applicant_id);
+                $("#foodApplicantNameLabel").val(info.name+ ' '+ info.applicant_mobile + ' ['+ info.nid+ ']');
+                $("#collectionDt").val(info.receive_dt);
+                $("#status").val(info.is_active);
+                $("#updateId").val(id);
+            } else {
+
+            }
+        }
+    });
+}
+function searchingReceivedFood(){
+    $.ajax({
+        type: "POST",
+        url: "FoodController/searchingReceivedFood",
+        data: $('#searchingReceivedFoodForm').serialize(),
+        success: function (data) {
+            if (data != '') {
+                $("#show_result").html(data);
+            } else {
+
+            }
+        }
+    });
+}
+
+function DeleteFoodCollectionInfo(id) {
+    swal({
+        title: "Are you sure?",
+        text: "After confirmation, your changes will be saved",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type: "POST",
+                url: "FoodController/DeleteFoodCollectionInfo",
+                data: {id: id},
+                'dataType': 'json',
+                success: function (response) {
+                    if (response.status == 'success') {
+                        swal({
+                            text: response.message,
+                            icon: "success",
+                        }).then(function () {
+                            location.reload();
+                        });
+
+                    } else {
+                        swal(response.message, {
+                            icon: "warning",
+                        });
+                    }
+                }
+            });
+        }
+    });
+}
+
+function deleteApplicantInfo(id) {
+    swal({
+        title: "Are you sure?",
+        text: "After confirmation, your changes will be saved",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                type: "POST",
+                url: "FoodController/deleteApplicantInfo",
+                data: {id: id},
+                'dataType': 'json',
+                success: function (response) {
+                    if (response.status == 'success') {
+                        swal({
+                            text: response.message,
+                            icon: "success",
+                        }).then(function () {
+                            location.reload();
+                        });
+
+                    } else {
+                        swal(response.message, {
+                            icon: "warning",
+                        });
+                    }
+                }
+            });
+        }
+    });
+}
+

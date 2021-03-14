@@ -8,6 +8,7 @@ class FoodModel extends CI_Model
     {
         $this->db->select($this->select_column);
         $this->db->from($this->table);
+        $this->db->where('is_active',1);
         if(isset($_POST["search"]["value"]))
         {
             $this->db->like("card_no", $_POST["search"]["value"]);
@@ -29,17 +30,20 @@ class FoodModel extends CI_Model
         {
             $this->db->limit($_POST['length'], $_POST['start']);
         }
+        $this->db->where('is_active',1);
         $query = $this->db->get();
         return $query->result();
     }
     function get_filtered_data(){
         $this->make_query();
+        $this->db->where('is_active',1);
         $query = $this->db->get();
         return $query->num_rows();
     }
     function get_all_data()
     {
         $this->db->select("*");
+        $this->db->where('is_active',1);
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -80,7 +84,7 @@ class FoodModel extends CI_Model
     function get_single_info($select=NULL,$table,$where=NULL)
     {
         if(!empty($select)){
-            $this->db->select("*");
+            $this->db->select($select);
         }else {
             $this->db->select("*");
         }
@@ -88,9 +92,51 @@ class FoodModel extends CI_Model
         if(!empty($where)) {
             $this->db->where($where);
         }
+        $this->db->limit(1);
         $query= $this->db->get();
         if($query->num_rows()>0){
             return $query->row();
+        }else{
+            return  false;
+        }
+    }
+
+    function getApplicantInfoAutoComplete($searchInfo){
+        $response = array();
+        if(isset($searchInfo) ) {
+            $this->db->select('id,name,mobile,nid');
+            $this->db->where("nid like '%" . $searchInfo . "%' ");
+            $this->db->or_where("name like '%" . $searchInfo . "%' ");
+            $this->db->or_where("mobile like '%" . $searchInfo . "%' ");
+            $this->db->where("is_active",1);
+            $records = $this->db->get('food_receiver_applicant_info');
+            if($records->num_rows()>0) {
+                $data=$records->result();
+                foreach ($data as $row) {
+                    $response[] = array("value" => $row->id, "label" => $row->name . ' - ' . $row->mobile . ' - [' . $row->nid . ']');
+                }
+            }
+        }
+        return json_encode( $response);
+    }
+
+    function get_receive_food_info($where=NULL)
+    {
+
+        $this->db->select("receive.*,applicant.name,applicant.nid,applicant.mobile as applicant_mobile,applicant.village,applicant.wordNo,applicant.pic,dealer.name as dealer_name,dealer.shop_name,dealer.address,dealer.mobile as dealer_mobile,program.title as program_name,program.is_active as program_status");
+        $this->db->from('food_receiver_record as receive');
+        $this->db->join('food_receiver_applicant_info as applicant','applicant.id=receive.applicant_id',"left");
+        $this->db->join('food_dealer_info as dealer','receive.dealer_id=dealer.id',"left");
+        $this->db->join('food_program_info as program','program.id=receive.food_program_id',"left");
+        if(!empty($where)){
+            $this->db->where($where);
+        }else {
+            $this->db->where('receive.is_active !=', 0);
+        }
+        $query= $this->db->get();
+
+        if($query->num_rows()>0){
+            return $query->result();
         }else{
             return  false;
         }

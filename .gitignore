@@ -5,6 +5,7 @@
 /application/config/config.php
 /application/config/database.php
 /library/profile/*
+/library/NID_image/*
 
 
 

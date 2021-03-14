@@ -723,5 +723,275 @@ class Setup_model extends CI_Model{
         $this->image_lib->resize();
         return $config['new_image'];
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    function get_all_info($select=NULL,$table,$where=NULL)
+    {
+        if(!empty($select)){
+            $this->db->select("*");
+        }else {
+            $this->db->select("*");
+        }
+        $this->db->from($table);
+        if(!empty($where)) {
+            $this->db->where($where);
+        }
+        $query= $this->db->get();
+        if($query->num_rows()>0){
+            return $query->result();
+        }else{
+            return  false;
+        }
+    }
+
+    function generateApplicantID()
+    {
+        $this->db->select("id");
+        $this->db->from($this->table);
+        $this->db->where('YEAR(created_time)',date('Y'));
+        $count= $this->db->count_all_results();
+        $finalID= $count+1;
+        return date('Y').str_pad($finalID,5,0,STR_PAD_LEFT);
+    }
+    function base64_to_jpeg($base64_string, $output_file) {
+        $ifp = fopen( $output_file, 'wb' );
+        fwrite( $ifp, base64_decode( $base64_string ) );
+        fclose( $ifp );
+        return $output_file;
+    }
+    function get_single_info($select=NULL,$table,$where=NULL)
+    {
+        if(!empty($select)){
+            $this->db->select($select);
+        }else {
+            $this->db->select("*");
+        }
+        $this->db->from($table);
+        if(!empty($where)) {
+            $this->db->where($where);
+        }
+        $this->db->limit(1);
+        $query= $this->db->get();
+        if($query->num_rows()>0){
+            return $query->row();
+        }else{
+            return  false;
+        }
+    }
+
+    function getApplicantInfoAutoComplete($searchInfo){
+        $response = array();
+        if(isset($searchInfo) ) {
+            $this->db->select('id,name,mobile,nid');
+            $this->db->where("nid like '%" . $searchInfo . "%' ");
+            $this->db->or_where("name like '%" . $searchInfo . "%' ");
+            $this->db->or_where("mobile like '%" . $searchInfo . "%' ");
+            $this->db->where("is_active",1);
+            $records = $this->db->get('food_receiver_applicant_info');
+            if($records->num_rows()>0) {
+                $data=$records->result();
+                foreach ($data as $row) {
+                    $response[] = array("value" => $row->id, "label" => $row->name . ' - ' . $row->mobile . ' - [' . $row->nid . ']');
+                }
+            }
+        }
+        return json_encode( $response);
+    }
+
+    function get_receive_food_info($where=NULL)
+    {
+
+        $this->db->select("receive.*,applicant.name,applicant.card_no,applicant.nid,applicant.mobile as applicant_mobile,applicant.village,applicant.wordNo,applicant.pic,dealer.name as dealer_name,dealer.shop_name,dealer.address,dealer.mobile as dealer_mobile,program.title as program_name,program.is_active as program_status");
+        $this->db->from('food_receiver_record as receive');
+        $this->db->join('food_receiver_applicant_info as applicant','applicant.id=receive.applicant_id',"left");
+        $this->db->join('food_dealer_info as dealer','receive.dealer_id=dealer.id',"left");
+        $this->db->join('food_program_info as program','program.id=receive.food_program_id',"left");
+        if(!empty($where)){
+            $this->db->where($where);
+        }else {
+            $this->db->where('receive.is_active !=', 0);
+        }
+        $query= $this->db->get();
+
+        if($query->num_rows()>0){
+            return ['status'=>'success','message'=>'Successfully Data found','data'=>$query->result()];
+        }else{
+            return ['status'=>'error','message'=>'No Data found','data'=>''];
+        }
+    }
+
+    function getPorichoyApiInfo($data,$apiURL,$apiKey){
+        $url = $apiURL;
+// Collection object
+// Initializes a new cURL session
+        $curl = curl_init($url);
+// Set the CURLOPT_RETURNTRANSFER option to true
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+// Set the CURLOPT_POST option to true for POST request
+        curl_setopt($curl, CURLOPT_POST, true);
+// Set the request data as JSON using json_encode function
+        curl_setopt($curl, CURLOPT_POSTFIELDS,  json_encode($data));
+// Set custom headers for RapidAPI Auth and Content-Type header
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'x-api-key:'.$apiKey,
+            'Content-Type: application/json'
+        ]);
+// Execute cURL request with all previous settings
+        $response = curl_exec($curl);
+// Close cURL session
+        curl_close($curl);
+      if(!empty($response)){
+          return $response;
+      }else{
+          return  false;
+      }
+    }
+
+    function getAlApplicantInfo($postData=null){
+
+        $response = array();
+
+        ## Read value
+        $draw = $postData['draw'];
+        $start = $postData['start'];
+        $rowperpage = $postData['length']; // Rows display per page
+        $columnIndex = $postData['order'][0]['column']; // Column index
+        $columnName = $postData['columns'][$columnIndex]['data']; // Column name
+        $columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+        $searchValue = $postData['search']['value']; // Search value
+
+        // Custom search filter
+        $dealer_id = !empty($postData['dealer_id'])?$postData['dealer_id']:'';
+
+        $this->db->like("card_no", $_POST["search"]["value"]);
+        $this->db->or_like("name", $_POST["search"]["value"]);
+        ## Search
+        $search_arr = array();
+        $searchQuery = "";
+        if($searchValue != ''){
+            $search_arr[] = " (name like '%".$searchValue."%' or 
+         card_no like '%".$searchValue."%' or 
+         mobile like '%".$searchValue."%' or 
+         nid like'%".$searchValue."%' ) ";
+        }
+        if($dealer_id != ''){
+            $search_arr[] = " dealer_id='".$dealer_id."' ";
+        }
+
+        if(count($search_arr) > 0){
+            $searchQuery = implode(" and ",$search_arr);
+        }
+
+        ## Total number of records without filtering
+        $this->db->select('count(*) as allcount');
+        $records = $this->db->get('food_receiver_applicant_info')->result();
+        $totalRecords = $records[0]->allcount;
+
+        ## Total number of record with filtering
+        $this->db->select('count(*) as allcount');
+        if($searchQuery != '')
+            $this->db->where($searchQuery);
+        $records = $this->db->get(' food_receiver_applicant_info')->result();
+        $totalRecordwithFilter = $records[0]->allcount;
+
+        ## Fetch records
+        $this->db->select(" `applicant_id`, `card_no`, `nid`, food_receiver_applicant_info.name, `pic`, `father_name`, food_receiver_applicant_info.mobile, `spouse_name`, `is_verify`, food_receiver_applicant_info.id,dealer.name as dealerName");
+        if($searchQuery != '') {
+            $this->db->where($searchQuery);
+        }
+        $this->db->join('food_dealer_info as dealer','dealer.id=food_receiver_applicant_info.dealer_id',"left");
+        $this->db->order_by($columnName, $columnSortOrder);
+        $this->db->limit($rowperpage, $start);
+        $records = $this->db->get('food_receiver_applicant_info')->result();
+        $data = array();
+        $i=$start+1;
+        foreach($records as $slKey=> $record ){
+            $action='';
+            $action.='<a href="'.base_url('FoodController/editApplicantInfo/'.md5($record->id)).'"  id="'.$record->id.'" class="btn btn-info btn-xs" title="Edit"><i class="glyphicon glyphicon-pencil"></i> Edit </a> <button type="button" name="delete" onclick="deleteApplicantInfo(' . $record->id . ')"  title="Delete"  class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> Delete</button>';
+            $action .= ' <a href="'.base_url('FoodController/viewApplicantInfo/'.md5($record->id)).'"   class="btn btn-warning btn-xs" style="margin:2px;"><i class="glyphicon glyphicon-eye-open"></i> Card</button>';
+//
+//            if($record->is_verify==1) {
+//                $action .= ' <button type="button" name="update" onclick="verifyApplicantInfo(' . $record->id . ')" class="btn btn-warning btn-xs" style="margin:2px;"><i class="glyphicon glyphicon-refresh"></i> Verify Now</button>';
+//            }else{
+//                $action .= '<span class="badge" style="margin:2px;"> <i class="glyphicon glyphicon-ok-circle"></i> Verified</span>';
+//            }
+            $img=file_exists($record->pic)?base_url().$record->pic:'img/default/default.jpg';
+
+            $data[] = array(
+                "img"=>'<img src="'.$img.'" class="img-thumbnail" width="50" height="35"  />',
+                "applicant_id"=>$record->applicant_id,
+                "card_no"=>$record->card_no,
+                "nid"=>$record->nid,
+                "name"=>$record->name,
+                "father_name"=>$record->father_name,
+                "mobile"=>$record->mobile,
+                "dealerName"=>$record->dealerName,
+                "action"=>$action,
+                "slNo"=>$i++,
+            );
+        }
+
+        ## Response
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordwithFilter,
+            "aaData" => $data
+        );
+
+        return $response;
+    }
+    function showApplicantInfo($where){
+        $this->db->select(" `applicant_id`, `card_no`, `nid`, food_receiver_applicant_info.name, `pic`, `father_name`, food_receiver_applicant_info.mobile, `spouse_name`, `is_verify`, food_receiver_applicant_info.id,dealer.name as dealerName,is_fringerprint_register");
+        if($where != '') {
+            $this->db->where($where);
+        }
+        $this->db->join('food_dealer_info as dealer','dealer.id=food_receiver_applicant_info.dealer_id',"left");
+//        $this->db->order_by('card_no','ASC');
+        $records = $this->db->get('food_receiver_applicant_info');
+        if($records->num_rows()>0){
+            return ['status'=>'success','message'=>'Successfully Data found','data'=>$records->result()];
+        }else{
+            return ['status'=>'error','message'=>'No Data found','data'=>''];
+        }
+    }
+
+    function showSingleApplicantInfo($where){
+        $this->db->select(" applicant. applicant_id, applicant.card_no, applicant.nid, applicant.name, applicant.pic, applicant.father_name, applicant.mobile, applicant.spouse_name, applicant.is_verify, applicant.id,dealer.name as dealerName,applicant.is_fringerprint_register,applicant.card_issue_dt,applicant.village,applicant.wordNo,applicant.post_office,applicant.guardin_type,dealer.address as dealerAddress,dealer.address as dealerAddress,dealer.mobile as dealerMobile,occupation.title as occuTitle,authority.name as authorityTitle");
+        if($where != '') {
+            $this->db->where($where);
+        }
+        $this->db->join('food_dealer_info as dealer','dealer.id=applicant.dealer_id',"left");
+        $this->db->join('food_dealer_info as authority','authority.id=applicant.issueingAuthority',"left");
+        $this->db->join('snf_global_form as occupation','occupation.id=applicant.occupation',"left");
+//        $this->db->order_by('card_no','ASC');
+        $records = $this->db->get('food_receiver_applicant_info as applicant ');
+        if($records->num_rows()>0){
+            return ['status'=>'success','message'=>'Successfully Data found','data'=>$records->row()];
+        }else{
+            return ['status'=>'error','message'=>'No Data found','data'=>''];
+        }
+    }
+
+
 
 }
