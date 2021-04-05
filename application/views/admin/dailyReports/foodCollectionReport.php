@@ -85,7 +85,7 @@ if(empty($_GET['programInfo'])) {
 <div class="fix stracture wrapper1">
     <div class="fix top-side">
         <div class="fix heading">
-            <h2><?php echo $all_data->full_name;?></h2>
+            <h2><?php echo (!empty($all_data->full_name)?$all_data->full_name:'');?></h2>
             <h4><?php echo $all_data->gram;?></h4>
             <p class="highilight">
                 <span>খাদ্য বান্ধব কর্মসূচি খাদ্য গ্রহণের তালিকা</span>
@@ -110,9 +110,9 @@ if(empty($_GET['programInfo'])) {
                 <tbody>
                 <?php if($report['status'] === 'error'):?>
                     <tr height='10'>
-                        <td colspan="8"><p style="text-indent: 10px;"><?php echo $report['message']  ?></p></td>
+                        <td colspan="9"><p style="text-indent: 10px;"><?php echo $report['message']  ?></p></td>
                     </tr>
-                <?php else: echo "<Pre>";  $sl=1; foreach($report['data'] as $row):?>
+                <?php else:  $sl=1; foreach($report['data'] as $row):?>
                     <tr>
                         <td class="tbldis"><?php echo $sl++;?></td>
                         <td class="tbldis"><?php echo $row->name;?></td>
