@@ -830,6 +830,7 @@ class Setup_model extends CI_Model{
         }else {
             $this->db->where('receive.is_active !=', 0);
         }
+        $this->db->order_by('receive.applicant_id','ASC');
         $query= $this->db->get();
 
         if($query->num_rows()>0){

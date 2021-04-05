@@ -74,7 +74,7 @@ $cert2='style="height:11iin;width:8.2in"';
                         </td>
                     </tr>
                     <tr height="60px">
-                        <td <?php if($logo==0) { ?> class="no-print" <?php } ?> style="width:1.5in; text-align:right;padding-top:20px;"><img src="logo_images/logo.png" height="55px" width="55px"/></td>
+                        <td <?php if($logo==0) { ?> class="no-print" <?php } ?> style="width:1.5in; text-align:right;padding-top:20px;"><img src="logo_images/logo.png" height="55px" width="65px"/></td>
                         <td <?php if($header==0) { ?> class="no-print" <?php } ?> style="text-align:center;height:60px;"><font style="font-size:15px; font-weight:bold; color:blue; width:5.5in;">গনপ্রজাতন্ত্রী বাংলাদেশ সরকার</font>  <br />
                             <div style="font-size:13px; font-weight:bold;">
                                 খাদ্য মন্ত্রণালয়
@@ -85,7 +85,7 @@ $cert2='style="height:11iin;width:8.2in"';
 
                         </td>
                         <td style="width:1.4in;padding-top:20px;">
-                            <img src="logo_images/logo.png" height="55px" width="55px"/>
+                            <img src="<?php echo base_url('logo_images/foodOdidoptor.jpg') ?>" height="65px" width="55px"/>
                         </td>
                     </tr>
 
@@ -145,7 +145,7 @@ $cert2='style="height:11iin;width:8.2in"';
                     <tr>
                         <td style="font-size:12px;vertical-align:middle;" colspan="4">৬। কার্ডধারীর স্বাক্ষর ও টিপসই
                             <input type="text" value='<?php echo $this->web->banDate($row->nationid)?>' style="width:585px;font-size:13px;border-bottom:1px dashed black;" readonly />
-                            </td>
+                        </td>
                     </tr>
 
 
@@ -174,32 +174,32 @@ $cert2='style="height:11iin;width:8.2in"';
                 <h3 style="text-align: center">খাদ্যশস্য বিতরণের বিবরণ </h3>
                 <table border="1px" align="center" width="95%" height="310px" align="center" style="border-collapse:collapse; " cellspacing="0" cellpadding="0"  >
                     <thead>
-                        <tr height="20px">
-                            <th rowspan="2" style="width:5%;font-size:14px;">নং</th>
-                            <th  rowspan="2" style="width:20%;font-size:14px;">বিতরনের তারিখ</th>
-                            <th style="width:19%;font-size:14px;" colspan="2">পরিমান (কেজি হিসেবে)</th>
-                            <th  rowspan="2" style="width:14%;font-size:14px;">গ্রহীতার স্বাক্ষর</th>
-                            <th  rowspan="2" style="width:14%;font-size:14px;">সরবরাহকারীর স্বাক্ষর</th>
-                        </tr>
-                        <tr height="20px">
+                    <tr height="20px">
+                        <th rowspan="2" style="width:5%;font-size:14px;">নং</th>
+                        <th  rowspan="2" style="width:20%;font-size:14px;">বিতরনের তারিখ</th>
+                        <th style="width:19%;font-size:14px;" colspan="2">পরিমান (কেজি হিসেবে)</th>
+                        <th  rowspan="2" style="width:14%;font-size:14px;">গ্রহীতার স্বাক্ষর</th>
+                        <th  rowspan="2" style="width:14%;font-size:14px;">সরবরাহকারীর স্বাক্ষর</th>
+                    </tr>
+                    <tr height="20px">
 
-                            <th style="width:10%;font-size:14px;">চাল</th>
-                            <th style="width:10%;font-size:14px;">অন্যান্য</th>
-                        </tr>
+                        <th style="width:10%;font-size:14px;">চাল</th>
+                        <th style="width:10%;font-size:14px;">অন্যান্য</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <?php for($i=1;$i<=22;$i++):?>
+                    <?php for($i=1;$i<=22;$i++):?>
 
-                            <tr height='25px'>
-                                <td style="text-align:center;font-size:11px;"><?php echo $this->web->banDate($i);?></td>
-                                <td id='wn<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
-                                <td id='wrel<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
-                                <td id='others<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
-                                <td id='collector<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
-                                <td id='dealer<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
-                            </tr>
+                        <tr height='25px'>
+                            <td style="text-align:center;font-size:11px;"><?php echo $this->web->banDate($i);?></td>
+                            <td id='wn<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
+                            <td id='wrel<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
+                            <td id='others<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
+                            <td id='collector<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
+                            <td id='dealer<?php echo $i?>' style="text-align:left;text-indent:15px;font-size:11px;"></td>
+                        </tr>
 
-                        <?php endfor;?>
+                    <?php endfor;?>
                     </tbody>
                 </table>
             </div>

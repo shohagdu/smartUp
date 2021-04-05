@@ -119,7 +119,7 @@ if(empty($_GET['programInfo'])) {
                         <td class="tbldis "><?php echo $row->card_no;?></td>
                         <td class="tbldis "><?php echo $row->nid;?></td>
                         <td class="tbldis "><?php echo $row->applicant_mobile;?></td>
-                        <td class="tbldis"><?php echo $this->web->banDate($row->food_amount)." (Kg)";?></td>
+                        <td class="tbldis" nowrap><?php echo $this->web->banDate($row->food_amount)." (Kg)";?></td>
                         <td class="tbldis"><?php echo $row->dealer_name;?></td>
                         <td class="tbldis"><?php echo $this->web->banDate($row->wordNo)." নং";?></td>
                         <td class="tbldis"><?php echo !empty($row->receive_dt)?$this->web->banDate(date('d-m-Y',strtotime($row->receive_dt))):'';?></td>

@@ -864,7 +864,7 @@ class FoodController extends CI_Controller {
         $applicant_info=$this->Setup->showSingleApplicantInfo(['md5(applicant.id)'=>$id]);
         $data['applicant_info']=($applicant_info['status']=='success')?$applicant_info['data']:'';
 
-        $receiveInfo=$this->Setup->get_receive_food_info(['md5(receive.food_program_id)'=>$id]);
+        $receiveInfo=$this->Setup->get_receive_food_info(['md5(receive.applicant_id)'=>$id]);
         $data['receiveInfo']=($receiveInfo['status']=='success')?$receiveInfo['data']:'';
 
         $data['all_data'] = $this->setup->getdata();
