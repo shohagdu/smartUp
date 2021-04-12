@@ -20,32 +20,6 @@
         }
         table.certificate td{line-height:2px;}
     </style>
-    <?php
-    // some execution here............
-    $fsonod=str_split($row->sonodno);
-
-    // for print hide show control.............
-    $status=$this->db->query("select * from tbl_webtools")->result();
-    //echo "<pre>";
-    foreach($status as $value)
-    {
-        if($value->item_no==1)
-        {
-            $sms=$value->status;
-        }
-        elseif($value->item_no==2)
-        {
-            $header=$value->status;
-        }
-        elseif($value->item_no==3)
-        {
-            $logo=$value->status;
-        }
-        elseif($value->item_no==4){
-            $muri=$value->status;
-        }
-    }
-    ?>
 </head>
 <?php
 //echo'<pre>';
@@ -58,11 +32,11 @@ $wrapper2='style="margin-top:3px;height:11in;width:8.2in"';
 $cert2='style="height:11iin;width:8.2in"';
 ?>
 <body>
-<div id="main" <?php if($muri==0):echo $main2;endif;?>>
-    <div id="main_second" <?php if($muri==0):echo $main_second2;endif;?>>
+<div id="main" <?php if(isset($muri) && $muri==0):echo $main2;endif;?>>
+    <div id="main_second" <?php if(isset($muri) &&$muri==0):echo $main_second2;endif;?>>
         <!--- certificate div start here --->
-        <div class="wrapper jolchap" <?php if($muri==0):echo $wrapper2;endif;?>>
-            <div id="cert" <?php if($muri==0):echo $cert2;endif;?>>
+        <div class="wrapper jolchap" <?php if(isset($muri) && $muri==0):echo $wrapper2;endif;?>>
+            <div id="cert" <?php if(isset($muri) && $muri==0):echo $cert2;endif;?>>
 
                 <table border="0px" width="99%" height="60px" cellspacing="0"  cellpadding="0" style="border-collapse:collapse;margin:0px auto;">
                     <tr>
@@ -74,8 +48,8 @@ $cert2='style="height:11iin;width:8.2in"';
                         </td>
                     </tr>
                     <tr height="60px">
-                        <td <?php if($logo==0) { ?> class="no-print" <?php } ?> style="width:1.5in; text-align:right;padding-top:20px;"><img src="logo_images/logo.png" height="55px" width="65px"/></td>
-                        <td <?php if($header==0) { ?> class="no-print" <?php } ?> style="text-align:center;height:60px;"><font style="font-size:15px; font-weight:bold; color:blue; width:5.5in;">গনপ্রজাতন্ত্রী বাংলাদেশ সরকার</font>  <br />
+                        <td <?php if(isset($logo) && $logo==0) { ?> class="no-print" <?php } ?> style="width:1.5in; text-align:right;padding-top:20px;"><img src="logo_images/logo.png" height="55px" width="65px"/></td>
+                        <td <?php if(isset($header) && $header==0) { ?> class="no-print" <?php } ?> style="text-align:center;height:60px;"><font style="font-size:15px; font-weight:bold; color:blue; width:5.5in;">গনপ্রজাতন্ত্রী বাংলাদেশ সরকার</font>  <br />
                             <div style="font-size:13px; font-weight:bold;">
                                 খাদ্য মন্ত্রণালয়
                             </div>
@@ -144,7 +118,7 @@ $cert2='style="height:11iin;width:8.2in"';
                     </tr>
                     <tr>
                         <td style="font-size:12px;vertical-align:middle;" colspan="4">৬। কার্ডধারীর স্বাক্ষর ও টিপসই
-                            <input type="text" value='<?php echo $this->web->banDate($row->nationid)?>' style="width:585px;font-size:13px;border-bottom:1px dashed black;" readonly />
+                            <input type="text" value='<?php echo (!empty($applicant_info->nationid)?  $this->web->banDate($applicant_info->nationid):'') ?>' style="width:585px;font-size:13px;border-bottom:1px dashed black;" readonly />
                         </td>
                     </tr>
 

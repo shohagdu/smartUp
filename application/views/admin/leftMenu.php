@@ -78,6 +78,19 @@
                                 <li><a href="DailyReports/foodCollectionReport" target="_blank">রিপোর্ট খাদ্য সংগ্রহ</a></li>
                             </ul>
                         </li>
+                         <li class="accordion">
+                            <a href="javascript:void(0);"><i class="glyphicon glyphicon-tags"></i><span> &nbsp;ভিজিডি খাদ্য বিতরণ</span> &nbsp;<i class="glyphicon glyphicon-chevron-down"></i></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="VgdController" >সদস্য গন </a></li>
+                                <!--
+                                <li><a href="VgdController/distributesRecord"> বিতরণের তথ্য সমূহ </a></li>
+                                <li><a href="VgdController/setupInfo">সেটিংস সমূহ </a></li>
+                                <li><a  href="DailyReports/vgdApplicantReport" target="_blank">সদস্যেদের রিপোর্ট </a></li>
+                                <li><a href="DailyReports/vgdDistributesReport" target="_blank">বিতরণের রিপোর্ট</a></li>
+                                -->
+                            </ul>
+                        </li>
+
 						<li>
 							<a class="ajax-link" href="Admin/mamlaNotice">
 								<i class="glyphicon glyphicon-tags"></i> &nbsp;

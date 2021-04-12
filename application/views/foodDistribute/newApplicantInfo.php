@@ -23,7 +23,7 @@
                                         <div class="form-group">
                                             <label for="NID" class="col-sm-4 control-label"> <span></span></label>
                                             <div class="col-sm-6">
-                                                <input type="text" value="3287844728" name="n_id" id="n_id"  class="form-control medium-font-inupt" placeholder="জাতীয় পরিচয় পত্র  নম্বর   প্রদান করূন"  />
+                                                <input type="text"  name="n_id" id="n_id"  class="form-control medium-font-inupt" placeholder="জাতীয় পরিচয় পত্র  নম্বর   প্রদান করূন"  />
                                             </div>
                                             <div class="col-sm-2">
                                                 <button type="button" name="n_id" onclick="verifyNIDInfo()" id="n_id"  class="btn btn-primary btn-md" > Search </button>

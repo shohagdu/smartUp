@@ -32,7 +32,7 @@ class FoodController extends CI_Controller {
     }
     //functions
     function index(){
-        $data["title"] = "Applicant Info (Food Distributes)";
+        $data["title"] = "আবেদনকারীদের তথ্য (খাদ্য বান্ধব কর্মসূচি)";
         $data["dealerInfo"] = $this->Setup->get_all_info('id,name',"food_dealer_info",['is_active'=>1,'type'=>1]);
         $this->load->view('admin/topBar',$data);
         $this->load->view('admin/leftMenu');
@@ -40,15 +40,13 @@ class FoodController extends CI_Controller {
         $this->load->view('admin/footer');
     }
    public function applicantInfo(){
-
         $postData = $this->input->post();
         $fetch_data = $this->Setup->getAlApplicantInfo($postData);
         echo json_encode($fetch_data); exit;
-
     }
 
     function newApplicantInfo(){
-        $data["title"] = "Add New Applicant Info (Food Distributes)";
+        $data["title"] = "নতুন আবেদনকারীর তথ্য (খাদ্য বান্ধব কর্মসূচি) ";
         $data["dealers"] = $this->Setup->get_all_info('id,name',"food_dealer_info",['is_active'=>1,'type'=>1]);
          $data["issuing_authority"] = $this->Setup->get_all_info('id,name',"food_dealer_info",['is_active'=>1,'type'=>2]);
         $data['occupation'] =$this->Setup->get_all_info('id,title',"snf_global_form", ['type' => 1, 'status' => 1]);

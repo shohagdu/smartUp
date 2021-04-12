@@ -2,7 +2,8 @@ $(function() {
     $(".dateFormatDate").datepicker({ dateFormat: 'dd-mm-yy' });
 });
 function verifyNIDInfo(){
-    var NiD=$("#n_id").val();
+    var NiDstr=$("#n_id").val();
+    var NiD= NiDstr.trim();
     $.ajax({
         url: 'FoodController/verifyNID',
         type: 'POST',
@@ -10,14 +11,12 @@ function verifyNIDInfo(){
         dataType:'JSON',
         //beforeSend:function() { alert('sending----'); },
         success: function(result) {
-            console.log(result);
+            // console.log(result);
             if(result.status == 'error'){
                 $('#errorMessage').fadeIn('slow').delay(5000).fadeOut('slow');
                 $('#errorText').text(result.message);
             }else if(result.status == 'success'){
-                console.log(result);
                 var data=result.data;
-                console.log(data);
                 $("#full_name").val(data.name);
                 $("#guardina_name").val(data.father);
                 $("#spouse_name").val(data.spouse);
@@ -128,6 +127,43 @@ $(document).ready(function(){
     $('#dealer_id').change(function(){
         distribute_applicant_data_dataTable.draw();
     });
+
+
+    var vgd_applicant_data = $('#vgd_applicant_data').DataTable({
+        "processing":true,
+        "serverSide":true,
+        "order":[],
+        "ajax":{
+            url:"VgdController/applicantInfo",
+            type:"POST",
+            'data': function(data){
+                data.dealer_id = $('#dealer_id').val();
+            }
+        },
+        'columns': [
+            { data: 'slNo' },
+            { data: 'img' },
+            { data: 'applicant_id' },
+            { data: 'card_no' },
+            { data: 'nid' },
+            { data: 'name' },
+            { data: 'father_name' },
+            { data: 'mobile' },
+            { data: 'action' },
+        ],
+        "columnDefs":[
+            {
+                "targets":[0, 3, 4],
+                "orderable":false,
+            },
+        ],
+    });
+    // $('#dealer_id').change(function(){
+    //     vgd_applicant_data.draw();
+    // });
+
+
+
 });
 // Food Program
 function addFoodProgram() {
@@ -509,3 +545,78 @@ function deleteApplicantInfo(id) {
     });
 }
 
+
+
+// VGD Program
+
+$(document).ready(function (e) {
+    $("#VgdApplicnatInfoForm").on('submit',(function(e) {
+        $("#submitBtn").attr('disabled',true);
+        var formData = new FormData(this)
+        e.preventDefault();
+        $.ajax({
+            url: "VgdController/addNewMemberAction",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData:false,
+            'dataType': 'json',
+            success: function(data)
+            {
+                if (data.error.length > 0) {
+                    $("#submitBtn").attr('disabled',false);
+                    var error_html = '';
+                    for (var count = 0; count < data.error.length; count++) {
+                        error_html += '<div class="alert alert-danger">' + data.error[count] + '</div>';
+                    }
+                    $('#error_output').html(error_html);
+                } else {
+                    $('#error_output').html('');
+                    swal({
+                        text: data.success,
+                        icon: "success",
+                    }).then(function () {
+                        window.location=data.redirect_page;
+                    });
+
+                }
+            }
+        });
+    }));
+});
+
+function deleteVGDApplicantInfo(id) {
+    swal({
+        title: "Are you sure?",
+        text: "After confirmation, your changes will be saved",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: "VgdController/deleteVGDApplicantInfo",
+                    data: {id: id},
+                    'dataType': 'json',
+                    success: function (response) {
+                        if (response.status == 'success') {
+                            swal({
+                                text: response.message,
+                                icon: "success",
+                            }).then(function () {
+                                location.reload();
+                            });
+
+                        } else {
+                            swal(response.message, {
+                                icon: "warning",
+                            });
+                        }
+                    }
+                });
+            }
+        });
+}

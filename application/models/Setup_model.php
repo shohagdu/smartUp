@@ -875,27 +875,27 @@ class Setup_model extends CI_Model{
         $draw = $postData['draw'];
         $start = $postData['start'];
         $rowperpage = $postData['length']; // Rows display per page
-        $columnIndex = $postData['order'][0]['column']; // Column index
-        $columnName = $postData['columns'][$columnIndex]['data']; // Column name
-        $columnSortOrder = $postData['order'][0]['dir']; // asc or desc
-        $searchValue = $postData['search']['value']; // Search value
+      //  $columnIndex = $postData['order'][0]['column']; // Column index
+       // $columnName = $postData['columns'][$columnIndex]['data']; // Column name
+       // $columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+        $searchValue = !empty($postData['search']['value'])?$postData['search']['value']:''; // Search value
 
         // Custom search filter
         $dealer_id = !empty($postData['dealer_id'])?$postData['dealer_id']:'';
 
-        $this->db->like("card_no", $_POST["search"]["value"]);
-        $this->db->or_like("name", $_POST["search"]["value"]);
+//        $this->db->like("card_no", $_POST["search"]["value"]);
+//        $this->db->or_like("name", $_POST["search"]["value"]);
         ## Search
         $search_arr = array();
         $searchQuery = "";
         if($searchValue != ''){
-            $search_arr[] = " (name like '%".$searchValue."%' or 
-         card_no like '%".$searchValue."%' or 
-         mobile like '%".$searchValue."%' or 
-         nid like'%".$searchValue."%' ) ";
+            $search_arr[] = " (food_receiver_applicant_info.name like '%".$searchValue."%' or 
+         food_receiver_applicant_info.card_no like '%".$searchValue."%' or 
+         food_receiver_applicant_info.mobile like '%".$searchValue."%' or 
+         food_receiver_applicant_info.nid like'%".$searchValue."%' ) ";
         }
         if($dealer_id != ''){
-            $search_arr[] = " dealer_id='".$dealer_id."' ";
+            $search_arr[] = " food_receiver_applicant_info.dealer_id='".$dealer_id."' ";
         }
 
         if(count($search_arr) > 0){
@@ -911,7 +911,7 @@ class Setup_model extends CI_Model{
         $this->db->select('count(*) as allcount');
         if($searchQuery != '')
             $this->db->where($searchQuery);
-        $records = $this->db->get(' food_receiver_applicant_info')->result();
+        $records = $this->db->get('food_receiver_applicant_info')->result();
         $totalRecordwithFilter = $records[0]->allcount;
 
         ## Fetch records
@@ -920,35 +920,38 @@ class Setup_model extends CI_Model{
             $this->db->where($searchQuery);
         }
         $this->db->join('food_dealer_info as dealer','dealer.id=food_receiver_applicant_info.dealer_id',"left");
-        $this->db->order_by($columnName, $columnSortOrder);
+        $this->db->order_by('food_receiver_applicant_info.id', 'ASC');
         $this->db->limit($rowperpage, $start);
-        $records = $this->db->get('food_receiver_applicant_info')->result();
-        $data = array();
-        $i=$start+1;
-        foreach($records as $slKey=> $record ){
-            $action='';
-            $action.='<a href="'.base_url('FoodController/editApplicantInfo/'.md5($record->id)).'"  id="'.$record->id.'" class="btn btn-info btn-xs" title="Edit"><i class="glyphicon glyphicon-pencil"></i> Edit </a> <button type="button" name="delete" onclick="deleteApplicantInfo(' . $record->id . ')"  title="Delete"  class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> Delete</button>';
-            $action .= ' <a href="'.base_url('FoodController/viewApplicantInfo/'.md5($record->id)).'"   class="btn btn-warning btn-xs" style="margin:2px;"><i class="glyphicon glyphicon-eye-open"></i> Card</button>';
+        $record = $this->db->get('food_receiver_applicant_info');
+        if(!empty($record->num_rows()>0)) {
+            $records = $record->result();
+            $data = array();
+            $i = $start + 1;
+            foreach ($records as $slKey => $record) {
+                $action = '';
+                $action .= '<a href="' . base_url('FoodController/editApplicantInfo/' . md5($record->id)) . '"  id="' . $record->id . '" class="btn btn-info btn-xs" title="Edit"><i class="glyphicon glyphicon-pencil"></i> Edit </a> <button type="button" name="delete" onclick="deleteApplicantInfo(' . $record->id . ')"  title="Delete"  class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> Delete</button>';
+                $action .= ' <a href="' . base_url('FoodController/viewApplicantInfo/' . md5($record->id)) . '"   class="btn btn-warning btn-xs" style="margin:2px;"><i class="glyphicon glyphicon-eye-open"></i> Card</button>';
 //
 //            if($record->is_verify==1) {
 //                $action .= ' <button type="button" name="update" onclick="verifyApplicantInfo(' . $record->id . ')" class="btn btn-warning btn-xs" style="margin:2px;"><i class="glyphicon glyphicon-refresh"></i> Verify Now</button>';
 //            }else{
 //                $action .= '<span class="badge" style="margin:2px;"> <i class="glyphicon glyphicon-ok-circle"></i> Verified</span>';
 //            }
-            $img=file_exists($record->pic)?base_url().$record->pic:'img/default/default.jpg';
+                $img = file_exists($record->pic) ? base_url() . $record->pic : 'img/default/default.jpg';
 
-            $data[] = array(
-                "img"=>'<img src="'.$img.'" class="img-thumbnail" width="50" height="35"  />',
-                "applicant_id"=>$record->applicant_id,
-                "card_no"=>$record->card_no,
-                "nid"=>$record->nid,
-                "name"=>$record->name,
-                "father_name"=>$record->father_name,
-                "mobile"=>$record->mobile,
-                "dealerName"=>$record->dealerName,
-                "action"=>$action,
-                "slNo"=>$i++,
-            );
+                $data[] = array(
+                    "img" => '<img src="' . $img . '" class="img-thumbnail" width="50" height="35"  />',
+                    "applicant_id" => $record->applicant_id,
+                    "card_no" => $record->card_no,
+                    "nid" => $record->nid,
+                    "name" => $record->name,
+                    "father_name" => $record->father_name,
+                    "mobile" => $record->mobile,
+                    "dealerName" => $record->dealerName,
+                    "action" => $action,
+                    "slNo" => $i++,
+                );
+            }
         }
 
         ## Response
@@ -993,6 +996,243 @@ class Setup_model extends CI_Model{
         }
     }
 
+    // Global Function worked
+    function generateApplicantVGDID()
+    {
+        $this->db->select("id");
+        $this->db->from("food_vgd_applicant_info");
+        $this->db->where('YEAR(created_time)',date('Y'));
+        $count= $this->db->count_all_results();
+        $finalID= $count+1;
+        return date('Y').str_pad($finalID,5,0,STR_PAD_LEFT);
+    }
 
+    /**
+     * @param $table
+     *
+     * @return bool
+     */
+    public function get($table, $where = false, $field_rows = '*', $limit = false, $order_by = false, $where_in = false, $group_by = false, $like = false) {
+        $this->db->select($field_rows)->from($table);
+
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        if (!empty($where_in)) {
+            $this->db->where_in($where_in['key'], $where_in['values']);
+        }
+
+        if (!empty($like)) {
+            $this->db->like($like);
+        }
+
+        if (!empty($limit)) {
+            $this->db->limit($limit['limit'], $limit['start']);
+        }
+
+        if (!empty($group_by)) {
+            $this->db->group_by($group_by);
+        }
+
+        if (!empty($order_by)) {
+            $this->db->order_by($order_by['field'], $order_by['order']);
+        }
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    public function get_join($table, $where = FALSE, $field_rows = '*', $limit = FALSE, $order_by = FALSE, $where_in_parmas = FALSE, $join_parmas = FALSE, $group_by = FALSE, $like = FALSE) {
+        $this->db->select($field_rows);
+        $this->db->from($table);
+
+        if (!empty($join_parmas)) {
+            foreach ($join_parmas as $join_item) {
+                if (isset($join_item['type'])) {
+                    $this->db->join($join_item['table'], $join_item['relation'], $join_item['type']);
+                } else {
+                    $this->db->join($join_item['table'], $join_item['relation']);
+                }
+            }
+        }
+
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        if (!empty($where_in_parmas)) {
+            if (isset($where_in_parmas['key']) && isset($where_in_parmas['values'])) {
+                $this->db->where_in($where_in_parmas['key'], $where_in_parmas['values']);
+            } else {
+                foreach ($where_in_parmas as $where_in) {
+                    $this->db->where_in($where_in['key'], $where_in['values']);
+                }
+            }
+        }
+
+        if (!empty($like)) {
+            $this->db->like($like);
+        }
+
+        if (!empty($limit)) {
+            $this->db->limit($limit['limit'], $limit['start']);
+        }
+
+        if (!empty($group_by)) {
+            $this->db->group_by($group_by);
+        }
+
+        if (!empty($order_by)) {
+            $this->db->order_by($order_by['field'], $order_by['order']);
+        }
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+    }
+
+    /**
+     * @param $table
+     * @param $where
+     *
+     * @return bool
+     */
+    public function get_row($table, $where, $field_rows = '*', $order_by = false, $where_in = false) {
+        $this->db->select($field_rows)->from($table);
+
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        if (!empty($where_in)) {
+            $this->db->where_in($where_in['key'], $where_in['values']);
+        }
+
+        if (!empty($order_by)) {
+            $this->db->order_by($order_by['filed'], $order_by['order']);
+        }
+
+        $query = $this->db->get();
+        if ($query->result()) {
+            return $query->row();
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function insert($table, $data = array()) {
+        $insert = $this->db->insert($table, $data);
+        if($insert) {
+            return $this->db->insert_id();
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function update($table, $data, $where) {
+        $this->db->where($where);
+        $this->db->update($table, $data);
+        return TRUE;
+    }
+
+    function getVGDApplicantInfo($postData=null){
+
+        $response = array();
+
+        ## Read value
+        $draw = $postData['draw'];
+        $start = $postData['start'];
+        $rowperpage = $postData['length']; // Rows display per page
+        //  $columnIndex = $postData['order'][0]['column']; // Column index
+        // $columnName = $postData['columns'][$columnIndex]['data']; // Column name
+        // $columnSortOrder = $postData['order'][0]['dir']; // asc or desc
+        $searchValue = !empty($postData['search']['value'])?$postData['search']['value']:''; // Search value
+
+        // Custom search filter
+        $dealer_id = !empty($postData['dealer_id'])?$postData['dealer_id']:'';
+
+//        $this->db->like("card_no", $_POST["search"]["value"]);
+//        $this->db->or_like("name", $_POST["search"]["value"]);
+        ## Search
+        $search_arr = array();
+        $searchQuery = "";
+        if($searchValue != ''){
+            $search_arr[] = " ( food_vgd_applicant_info.name like '%".$searchValue."%' or 
+          food_vgd_applicant_info.vgd_card_no like '%".$searchValue."%' or 
+          food_vgd_applicant_info.mobile_no like '%".$searchValue."%' or 
+          food_vgd_applicant_info.nid like'%".$searchValue."%' ) ";
+        }
+        $search_arr[] = " food_vgd_applicant_info.is_active = 1 ";
+
+        if(count($search_arr) > 0){
+            $searchQuery = implode(" and ",$search_arr);
+        }
+
+        ## Total number of records without filtering
+        $this->db->select('count(*) as allcount');
+        $records = $this->db->get('food_vgd_applicant_info')->result();
+        $totalRecords = $records[0]->allcount;
+
+        ## Total number of record with filtering
+        $this->db->select('count(*) as allcount');
+        if($searchQuery != '')
+            $this->db->where($searchQuery);
+        $records = $this->db->get('food_vgd_applicant_info')->result();
+        $totalRecordwithFilter = $records[0]->allcount;
+
+        ## Fetch records
+        $this->db->select(" `applicant_id`, `vgd_card_no`, `nid`, food_vgd_applicant_info.name, `pic`, `gurdian_name`, food_vgd_applicant_info.mobile_no,  `is_verify`, food_vgd_applicant_info.id");
+        if($searchQuery != '') {
+            $this->db->where($searchQuery);
+        }
+//        $this->db->join('food_dealer_info as dealer','dealer.id=food_receiver_applicant_info.dealer_id',"left");
+        $this->db->order_by('food_vgd_applicant_info.id', 'ASC');
+        $this->db->limit($rowperpage, $start);
+        $record = $this->db->get('food_vgd_applicant_info');
+
+        if(!empty($record->num_rows()>0)) {
+            $records = $record->result();
+            $data = array();
+            $i = $start + 1;
+            foreach ($records as $slKey => $record) {
+                $action = '';
+                $action .= '<a href="' . base_url('VgdController/editNewMember/' . md5($record->id)) . '"  id="' . $record->id . '" class="btn btn-info btn-xs" title="Edit"><i class="glyphicon glyphicon-pencil"></i> Edit </a> <button type="button" name="delete" onclick="deleteVGDApplicantInfo(' . $record->id . ')"  title="Delete"  class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> Delete</button>';
+//                $action .= ' <a href="' . base_url('FoodController/viewApplicantInfo/' . md5($record->id)) . '"   class="btn btn-warning btn-xs" style="margin:2px;"><i class="glyphicon glyphicon-eye-open"></i> Card</button>';
+
+                $img = file_exists($record->pic) ? base_url() . $record->pic : 'img/default/default.jpg';
+
+                $data[] = array(
+                    "img" => '<img src="' . $img . '" class="img-thumbnail" width="50" height="35"  />',
+                    "applicant_id" => $record->applicant_id,
+                    "card_no" => $record->vgd_card_no,
+                    "nid" => $record->nid,
+                    "name" => $record->name,
+                    "father_name" => $record->gurdian_name,
+                    "mobile" => $record->mobile_no,
+                    "dealerName" => '',
+                    "action" => $action,
+                    "slNo" => $i++,
+                );
+            }
+        }
+
+        ## Response
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordwithFilter,
+            "aaData" => $data
+        );
+
+        return $response;
+    }
 
 }

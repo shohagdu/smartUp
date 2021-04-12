@@ -4,7 +4,7 @@
             <div class="panel-heading">
                 <div class="col-sm-8"><div class="row"> <?php echo (!empty($title)?$title:''); ?></div></div>
                 <div class="col-sm-4">
-                    <a href="<?php echo base_url('FoodController/newApplicantInfo') ?>" class="btn btn-success btn-xs pull-right"><i class="glyphicon glyphicon-plus">নতুন যোগ করুন</i> </a>
+                    <a href="<?php echo base_url('FoodController/newApplicantInfo') ?>" class="btn btn-success btn-xs pull-right"><i class="glyphicon glyphicon-plus"></i> নতুন যোগ করুন </a>
 
                 </div>
                 <div class="clearfix"></div>
