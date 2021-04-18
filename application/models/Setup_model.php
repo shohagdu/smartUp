@@ -1234,5 +1234,44 @@ class Setup_model extends CI_Model{
 
         return $response;
     }
+    function get_receive_vgd_food_info($where=NULL,$receive_status=NULL)
+    {
 
+        if($receive_status==1) {
+            //Successfully received product
+            $this->db->select("receive.*,applicant.name,applicant.vgd_card_no,applicant.nid,applicant.mobile_no as applicant_mobile,applicant.village,applicant.wordNo,applicant.pic,circle.title as circleTitle,program.title as program_name,program.is_active as program_status");
+            $this->db->from('food_vgd_applicant_info as applicant');
+            $this->db->join('food_vgd_receiver_info as receive', 'applicant.id=receive.applicant_id', "left");
+            $this->db->join('food_vgd_circle_setup as circle', 'receive.vgd_circle_id=circle.id', "left");
+            $this->db->join('food_program_info as program', 'program.id=receive.vgd_program_id', "left");
+                    if(!empty($where)){
+                        $this->db->where($where);
+                    }else {
+                        $this->db->where('receive.is_active !=', 0);
+                    }
+            $this->db->order_by('applicant.vgd_card_no', 'ASC');
+            $query = $this->db->get();
+        }else{
+            //No  product received
+            $vgd_program_id=(!empty($where['receive.vgd_program_id']))?$where['receive.vgd_program_id']:'';
+            $vgd_circle_id=(!empty($where['receive.vgd_circle_id']))?$where['receive.vgd_circle_id']:'';
+            unset($where['receive.vgd_program_id']);
+            unset($where['receive.vgd_circle_id']);
+            $this->db->select("receive.*,applicant.name,applicant.vgd_card_no,applicant.nid,applicant.mobile_no as applicant_mobile,applicant.village,applicant.wordNo,applicant.pic,circle.title as circleTitle,program.title as program_name,program.is_active as program_status");
+            $this->db->from('food_vgd_applicant_info as applicant');
+            $this->db->join('food_vgd_receiver_info as receive', "applicant.id=receive.applicant_id AND receive.vgd_program_id= $vgd_program_id AND receive.vgd_circle_id=$vgd_circle_id ", "left");
+            $this->db->join('food_vgd_circle_setup as circle', 'receive.vgd_circle_id=circle.id', "left");
+            $this->db->join('food_program_info as program', 'program.id=receive.vgd_program_id', "left");
+            $this->db->where('applicant.is_active', 1);
+            $this->db->where('receive.applicant_id IS NULL');
+            $this->db->order_by('applicant.vgd_card_no', 'ASC');
+            $query = $this->db->get();
+        }
+       // return  $this->db->last_query();
+        if($query->num_rows()>0){
+            return ['status'=>'success','message'=>'Successfully Data found','data'=>$query->result()];
+        }else{
+            return ['status'=>'error','message'=>'No Data found','data'=>''];
+        }
+    }
 }

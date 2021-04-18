@@ -84,10 +84,13 @@
                                 <li><a href="VgdController" >সদস্য গন </a></li>
                                 <!--
                                 <li><a href="VgdController/distributesRecord"> বিতরণের তথ্য সমূহ </a></li>
-                                <li><a href="VgdController/setupInfo">সেটিংস সমূহ </a></li>
-                                <li><a  href="DailyReports/vgdApplicantReport" target="_blank">সদস্যেদের রিপোর্ট </a></li>
-                                <li><a href="DailyReports/vgdDistributesReport" target="_blank">বিতরণের রিপোর্ট</a></li>
                                 -->
+                                <li><a href="VgdController/setupInfo">সেটিংস সমূহ </a></li>
+                                <!--
+                                <li><a  href="DailyReports/vgdApplicantReport" target="_blank">সদস্যেদের রিপোর্ট </a></li>
+                                 -->
+                                <li><a href="DailyReports/vgdDistributesReport" target="_blank">বিতরণের রিপোর্ট</a></li>
+
                             </ul>
                         </li>
 

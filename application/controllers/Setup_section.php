@@ -8,6 +8,7 @@ class Setup_section extends CI_Controller {
 		ob_start();
 		parent::__construct();
 		
+		$this->load->model('Setup_model', 'setup');
 		$this->load->model('numbertobangla', 'bnc');
 		$this->load->model('Transfer_model','transfer');
 		$this->load->model('money_receipt_model','money_receipt');

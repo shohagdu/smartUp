@@ -331,7 +331,7 @@ class FoodController extends CI_Controller {
     function foodProgram(){
         $data["add_title"] = "নতুন কর্মসূচি তৈরি ";
         $data["title"] = "কর্মসূচি সমূহ ";
-        $data["record"] = $this->Setup->get_all_info('id,title,person_amt,total_allotment',"food_program_info",['is_active'=>1]);
+        $data["record"] = $this->Setup->get_all_info('id,title,person_amt,total_allotment',"food_program_info",['is_active !='=>0,'program_type'=>1]);
 
         $this->load->view('admin/topBar',$data);
         $this->load->view('admin/leftMenu');
@@ -341,7 +341,7 @@ class FoodController extends CI_Controller {
     function dealerInfo(){
         $data["add_title"] = "নতুন ডিলার  ";
         $data["title"] = "ডিলার সমূহ ";
-        $data["record"] = $this->Setup->get_all_info('id,type,name,shop_name,address,mobile,is_active',"food_dealer_info",['is_active'=>1,'type'=>1]);
+        $data["record"] = $this->Setup->get_all_info('id,type,name,shop_name,address,mobile,is_active',"food_dealer_info",['is_active !='=>0,'type'=>1]);
 
         $this->load->view('admin/topBar',$data);
         $this->load->view('admin/leftMenu');
@@ -351,7 +351,7 @@ class FoodController extends CI_Controller {
     function issuingAuthority(){
         $data["add_title"] = "নতুন ইস্যুকারী  ";
         $data["title"] = "ইস্যুকারী সমূহ ";
-        $data["record"] = $this->Setup->get_all_info('id,type,name,designation,address,mobile,is_active',"food_dealer_info",['is_active'=>1,'type'=>2]);
+        $data["record"] = $this->Setup->get_all_info('id,type,name,designation,address,mobile,is_active',"food_dealer_info",['is_active !='=>0,'type'=>2]);
 
         $this->load->view('admin/topBar',$data);
         $this->load->view('admin/leftMenu');
@@ -392,6 +392,7 @@ class FoodController extends CI_Controller {
     }
     function updateFoodProgram(){
         extract($_POST);
+
         if(isset($_POST['submit_info'])){
             $error_array = array();
             $success_output = '';
@@ -399,12 +400,18 @@ class FoodController extends CI_Controller {
             if(empty($programName)){
                 $error_array[] = 'কর্মসূচির নাম প্রদান করুন ';
             }
-            if(empty($person_amt)){
-                $error_array[] = 'প্রত্যেক জনের জন্য বরাদ্ধ প্রদান করুন';
+            if(isset($program_type) && $program_type!=2) {
+                if (empty($person_amt)) {
+                    $error_array[] = 'প্রত্যেক জনের জন্য বরাদ্ধ প্রদান করুন';
+                }
+                if (empty($total_allotment)) {
+                    $error_array[] = 'মোট বরাদ্ধ  প্রদান করুন';
+                }
             }
-
-            if(empty($total_allotment)){
-                $error_array[] = 'মোট বরাদ্ধ  প্রদান করুন';
+            if(isset($program_type) && $program_type==2) {
+                if (empty($vgdCircle)) {
+                    $error_array[] = 'ভিজিডি চক্র চিহ্নিত করুন';
+                }
             }
             if(empty($status)){
                 $error_array[] = 'স্ট্যাটাস চিহ্নিত করূন';
@@ -414,10 +421,12 @@ class FoodController extends CI_Controller {
             if(empty($error_array)) {
                 if(empty($updateId)) {
                     $data = array(
-                        "title" => (!empty(trim($programName)) ? trim($programName) : ''),
-                        "person_amt" => (!empty(trim($person_amt)) ? trim($person_amt) : ''),
-                        "total_allotment" => (!empty(trim($total_allotment)) ? trim($total_allotment) : ''),
-                        "is_active" => (!empty(trim($status)) ? trim($status) : ''),
+                        "program_type" => (!empty(trim($program_type)) ? trim($program_type) : NULL),
+                        "vgd_cricle" => (!empty(trim($vgdCircle)) ? trim($vgdCircle) : NULL),
+                        "title" => (!empty(trim($programName)) ? trim($programName) : NULL),
+                        "person_amt" => (!empty(trim($person_amt)) ? trim($person_amt) : NULL),
+                        "total_allotment" => (!empty(trim($total_allotment)) ? trim($total_allotment) : NULL),
+                        "is_active" => (!empty(trim($status)) ? trim($status) : NULL),
                         "created_time" => date('Y-m-d H:i:s'),
                         "created_by" => $this->session->userdata('id'),
                         "created_ip" => (string)$this->input->ip_address(),
@@ -432,6 +441,8 @@ class FoodController extends CI_Controller {
                 }else{
 
                     $data = array(
+                        "program_type" => (!empty(trim($program_type)) ? trim($program_type) : NULL),
+                        "vgd_cricle" => (!empty(trim($vgdCircle)) ? trim($vgdCircle) : NULL),
                         "title" => (!empty(trim($programName)) ? trim($programName) : ''),
                         "person_amt" => (!empty(trim($person_amt)) ? trim($person_amt) : ''),
                         "total_allotment" => (!empty(trim($total_allotment)) ? trim($total_allotment) : ''),
@@ -579,7 +590,6 @@ class FoodController extends CI_Controller {
                         "updated_by" => $this->session->userdata('id'),
                         "updated_ip" => (string)$this->input->ip_address(),
                     );
-
 
                     $this->db->trans_start();
                     $this->db->where('id',$updateId);

@@ -221,9 +221,16 @@ class DailyReports extends CI_Controller {
     public function foodCollectionReport(){
         $data=array();
         $data['all_data'] = $this->setup->getdata();
-        $data['program'] =  $this->setup->get_all_info('id,title,person_amt,total_allotment',"food_program_info",['is_active'=>1]);
+        $data['program'] =  $this->setup->get_all_info('id,title,person_amt,total_allotment',"food_program_info",['is_active'=>1,'program_type'=>1]);
         $data['dealerInfo']= $this->setup->get_all_info('id,type,name,shop_name,address,mobile,is_active',"food_dealer_info",['is_active'=>1,'type'=>1]);
         $this->load->view("admin/dailyReports/foodCollectionReport",$data);
+    }
+    public function vgdDistributesReport(){
+        $data=array();
+        $data['all_data'] = $this->setup->getdata();
+        $data['program'] =  $this->setup->get_all_info('id,title,person_amt,total_allotment',"food_program_info",['is_active'=>1,'program_type'=>2]);
+        $data['AllCircleInfo']=$this->setup->get('food_vgd_circle_setup',['is_active'=>1],'id,title,issue_dt,distributes_dt,implement_authority,responsibile_officer,responsibile_uno',['filed'=>'id','order'=>'DESC']);
+        $this->load->view("admin/dailyReports/vgdDistributesReport",$data);
     }
 
 }

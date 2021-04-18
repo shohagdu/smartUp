@@ -93,6 +93,10 @@ $(document).ready(function (e) {
 
 $(document).ready(function(){
     $('#exampleNew').dataTable();
+    $('#exampleNew1').dataTable();
+    $('#exampleNew2').dataTable();
+    $('#exampleNew3').dataTable();
+    $('#exampleNew4').dataTable();
 
     var distribute_applicant_data_dataTable = $('#food_distribute_applicant_data').DataTable({
         "processing":true,
@@ -305,6 +309,7 @@ function editAuthorityInfo(id){
                 $("#name").val(info.name);
                 $("#shopName").val(info.shop_name);
                 $("#address").val(info.address);
+                $("#designation").val(info.designation);
                 $("#mobile").val(info.mobile);
                 $("#status").val(info.is_active);
                 $("#updateId").val(id);
@@ -314,6 +319,32 @@ function editAuthorityInfo(id){
         }
     });
 }
+function editAuthorityInfoVGD(id){
+    $("#authorityInfoForm")[0].reset();
+    $(".output_error").html('');
+    $(".saveBtnLevel").html('Update');
+    $.ajax({
+        type: "POST",
+        url: "FoodController/getAuthorityInfo",
+        data: {id:id},
+        'dataType': 'json',
+        success: function (data) {
+            if (data.status = 'success') {
+                var info=data.data;
+                $(".name").val(info.name);
+                $(".shopName").val(info.shop_name);
+                $(".address").val(info.address);
+                $(".designation").val(info.designation);
+                $(".mobile").val(info.mobile);
+                $(".status").val(info.is_active);
+                $(".updateId").val(id);
+            } else {
+
+            }
+        }
+    });
+}
+
 function DeleteAuthorityInfo(id) {
     swal({
         title: "Are you sure?",
@@ -619,4 +650,123 @@ function deleteVGDApplicantInfo(id) {
                 });
             }
         });
+}
+
+// VGD Progrom
+
+// Authority information update
+function addVGDCircleInfo(){
+    $("#vgdCircleForm")[0].reset();
+    $("#saveBtnLevel").html('Save');
+    $('.output_error').html('');
+}
+function updateVGDCircleInfo() {
+    $.ajax({
+        type: "POST",
+        url: "VgdController/saveVgdCircle",
+        data: $('#vgdCircleForm').serialize(),
+        'dataType': 'json',
+        success: function (data) {
+            if (data.error.length > 0) {
+                var error_html = '';
+                for (var count = 0; count < data.error.length; count++) {
+                    error_html += '<div class="alert alert-danger">' + data.error[count] + '</div>';
+                }
+                $('.output_error').html(error_html);
+            } else {
+                $('.output_error').html('');
+                swal({
+                    text: data.success,
+                    icon: "success",
+                }).then(function () {
+                    location.reload();
+                });
+
+            }
+        }
+    });
+}
+function editVGDcircleInfo(id){
+    $("#vgdCircleForm")[0].reset();
+    $(".output_error").html('');
+    $("#saveBtnLevelCircle").html('Update');
+    $.ajax({
+        type: "POST",
+        url: "VgdController/getVGDcircleInfo",
+        data: {id:id},
+        'dataType': 'json',
+        success: function (data) {
+            if (data.status = 'success') {
+                var info=data.data;
+                $("#name").val(info.title);
+                $("#cardIssueDt").val(info.issue_dt);
+                $("#cardDistributesDt").val(info.distributes_dt);
+                $("#foodType").val(info.food_type);
+                $("#implementing_authority").val(info.implement_authority);
+                $("#responsibleOfficer").val(info.responsibile_officer);
+                $("#responsible_uno_info").val(info.responsibile_uno);
+                $("#statusVGD").val(info.is_active);
+                $("#updateIdVGD").val(id);
+            }
+        }
+    });
+}
+function DeleteVGDcircleInfo(id) {
+    swal({
+        title: "Are you sure?",
+        text: "After confirmation, your changes will be saved",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: "VgdController/deleteVGDcircleInfo",
+                    data: {id: id},
+                    'dataType': 'json',
+                    success: function (response) {
+                        if (response.status == 'success') {
+                            swal({
+                                text: response.message,
+                                icon: "success",
+                            }).then(function () {
+                                location.reload();
+                            });
+
+                        } else {
+                            swal(response.message, {
+                                icon: "warning",
+                            });
+                        }
+                    }
+                });
+            }
+        });
+}
+
+function editVgdMonth(id){
+    $("#programInfoForm")[0].reset();
+    $("#output_error").html('');
+    $("#saveBtnLevel").html('Update');
+    $('.output_error').html('');
+
+    $.ajax({
+        type: "POST",
+        url: "FoodController/getFoodProgram",
+        data: {id:id},
+        'dataType': 'json',
+        success: function (data) {
+            if (data.status = 'success') {
+                var info=data.data;
+                $("#programName").val(info.title);
+                $("#vgdCircle").val(info.vgd_cricle);
+                $("#status").val(info.is_active);
+                $("#updateId").val(id);
+            } else {
+
+            }
+        }
+    });
 }
