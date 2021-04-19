@@ -18,7 +18,7 @@
                                 <th width="3%">S/L</th>
                                 <th>কর্মসূচির নাম</th>
                                 <th >প্রত্যেক জনের জন্য বরাদ্ধ</th>
-                                <th >মোট বরাদ্ধ</th>
+                                <th >Status</th>
                                 <th width="15%">#</th>
                             </tr>
                         </thead>
@@ -32,7 +32,7 @@
                                 <td><?php echo $i++; ?></td>
                                 <td><?php echo $row->title ?></td>
                                 <td><?php echo $row->person_amt ?></td>
-                                <td><?php echo $row->total_allotment ?></td>
+                                <td><?php echo !empty($row->is_active)?(($row->is_active==1)?"Active":'Inactive') :'' ?></td>
                                 <td>
                                     <button type="button" data-toggle="modal"  data-target="#exampleModal" onclick="editFoodProgram('<?php echo $row->id  ?>')" name="update" class="btn btn-info btn-xs" title="Edit"><i class="glyphicon glyphicon-pencil"></i> Edit </button>
                                     <button type="button" name="delete" title="Delete" onclick="DeleteFoodProgram('<?php echo $row->id  ?>')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i> Delete</button>

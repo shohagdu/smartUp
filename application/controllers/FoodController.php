@@ -421,7 +421,7 @@ class FoodController extends CI_Controller {
             if(empty($error_array)) {
                 if(empty($updateId)) {
                     $data = array(
-                        "program_type" => (!empty(trim($program_type)) ? trim($program_type) : NULL),
+                        "program_type" => (!empty(trim($program_type)) ? trim($program_type) : 1),
                         "vgd_cricle" => (!empty(trim($vgdCircle)) ? trim($vgdCircle) : NULL),
                         "title" => (!empty(trim($programName)) ? trim($programName) : NULL),
                         "person_amt" => (!empty(trim($person_amt)) ? trim($person_amt) : NULL),
@@ -441,7 +441,7 @@ class FoodController extends CI_Controller {
                 }else{
 
                     $data = array(
-                        "program_type" => (!empty(trim($program_type)) ? trim($program_type) : NULL),
+                        "program_type" => (!empty(trim($program_type)) ? trim($program_type) : 1),
                         "vgd_cricle" => (!empty(trim($vgdCircle)) ? trim($vgdCircle) : NULL),
                         "title" => (!empty(trim($programName)) ? trim($programName) : ''),
                         "person_amt" => (!empty(trim($person_amt)) ? trim($person_amt) : ''),
