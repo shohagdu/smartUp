@@ -17,6 +17,7 @@ class Api extends CI_Controller
         if ($method == 'POST') {
 
             $request = json_decode($_POST['data'], true);
+
             $insert_data = [];
 
             if (count($request) > 0) {
@@ -25,6 +26,7 @@ class Api extends CI_Controller
                     // insert new entry
                     if(!empty($item['card_no'])){
                         $insert_data[] = [
+                            "log_id"      => (!empty($item['id'])?$item['id']:''), // log_id
                             "card_no"      => (!empty($item['card_no'])?$item['card_no']:''), // card no
                             "attendance_date" => date("Y-m-d H:i:s", strtotime($item['attendance_date'])),
                             "nid_no"         => (int) $item['nid_no'],
@@ -36,7 +38,7 @@ class Api extends CI_Controller
                 }
 
                 // start transaction
-                $this->db->trans_start();
+                // $this->db->trans_start();
                 if(!empty($insert_data)){
                     $this->db->insert_batch("attendance_logs", $insert_data);
                 }
@@ -114,6 +116,7 @@ class Api extends CI_Controller
 
         if($foodProgram->num_rows() > 0){
             $foodProgramData= $foodProgram->row();
+
         }else{
             die(json_encode( ['status'=>'error','message'=>'Sorry!! No Active Food Program Found, Please first active one Food Program ','data'=>[]]));
         }
@@ -125,7 +128,7 @@ class Api extends CI_Controller
         $un_process_data =
             $this->db->select("attendance_logs.id as logs_primary_id, attendance_logs.attendance_date, attendance_logs.nid_no, attendance_logs.status, attendance_logs.created_at, created_by_ip,food_receiver_applicant_info.id as applicant_primary_id,food_receiver_applicant_info.dealer_id,food_receiver_applicant_info.name,food_receiver_applicant_info.nid as applicant_nid,food_receiver_applicant_info.father_name,food_receiver_applicant_info.mobile,card_issue_dt,date_of_birth")
                 ->join('food_receiver_applicant_info','food_receiver_applicant_info.card_no=attendance_logs.card_no','left')
-                ->limit(100)
+                ->limit(30)
                 ->get_where("attendance_logs", [
                     "is_process" => 0
                 ])->result()
@@ -157,16 +160,11 @@ class Api extends CI_Controller
                 }else{
 
                     $existance_qry = $this->db->select("food_receiver_record.id, food_receiver_record.applicant_id, food_receiver_record.food_program_id, receive_dt")
-                        ->join('food_program_info','food_program_info.id=food_receiver_record.food_program_id 
-                        AND food_program_info.is_active=1
-                         AND food_program_info.program_type=1
-                    
-                    ','left')
                         ->get_where("food_receiver_record", [
-                            "food_receiver_record.applicant_id"      =>  $item->applicant_primary_id
+                            "food_receiver_record.applicant_id" =>  $item->applicant_primary_id,
+                            'food_receiver_record.food_program_id' => $foodProgramData->programID
 
                         ]);
-
 
                     if ($existance_qry->num_rows() > 0) {
                         $update_data_info = [
@@ -250,7 +248,9 @@ class Api extends CI_Controller
         if ($method == 'POST') {
 
             $request = json_decode($_POST['data'], true);
-
+            // echo "<pre>";
+            // print_r($request);
+            // exit;
 
             $insert_data = [];
 
@@ -269,18 +269,19 @@ class Api extends CI_Controller
                         ];
                     }
                 }
-
-
+                //echo "<pre>";
+                //print_r($insert_data);
+                // exit;
 
                 // start transaction
-                $this->db->trans_start();
+                //$this->db->trans_start();
                 if(!empty($insert_data)){
                     $this->db->insert_batch("vgd_attendance_logs", $insert_data);
                 }
 
                 // echo "<pre>";
-                // print_r($this->db->last_query());
-                // exit;
+                //  print_r($this->db->last_query());
+                //  exit;
 
                 if ($this->db->trans_status() === false) {
                     $this->db->trans_rollback();
@@ -335,9 +336,9 @@ class Api extends CI_Controller
             die(json_encode( ['status'=>'error','message'=>'Sorry!! No Active Food Program Found, Please first active one Food Program ','data'=>[]]));
         }
 
-        //   echo "<pre>";
-        //   print_r($foodProgramData);
-        //   exit;
+        //  echo "<pre>";
+        //  print_r($foodProgramData);
+        //  exit;
 
 
         // Get Current Circle information start
