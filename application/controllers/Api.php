@@ -126,7 +126,7 @@ class Api extends CI_Controller
 
         // get all un-processed data
         $un_process_data =
-            $this->db->select("attendance_logs.id as logs_primary_id, attendance_logs.attendance_date, attendance_logs.nid_no, attendance_logs.status, attendance_logs.created_at, created_by_ip,food_receiver_applicant_info.id as applicant_primary_id,food_receiver_applicant_info.dealer_id,food_receiver_applicant_info.name,food_receiver_applicant_info.nid as applicant_nid,food_receiver_applicant_info.father_name,food_receiver_applicant_info.mobile,card_issue_dt,date_of_birth")
+            $this->db->select("attendance_logs.id as logs_primary_id, attendance_logs.attendance_date, attendance_logs.nid_no, attendance_logs.status, attendance_logs.created_at, created_by_ip,food_receiver_applicant_info.id as applicant_primary_id,food_receiver_applicant_info.dealer_id,food_receiver_applicant_info.name,food_receiver_applicant_info.nid as applicant_nid,food_receiver_applicant_info.father_name,food_receiver_applicant_info.mobile,card_issue_dt,date_of_birth,food_receiver_applicant_info.card_no as applicant_card_no")
                 ->join('food_receiver_applicant_info','food_receiver_applicant_info.card_no=attendance_logs.card_no','left')
                 ->limit(30)
                 ->get_where("attendance_logs", [
@@ -243,6 +243,19 @@ class Api extends CI_Controller
 
     public function vgd_data_sync()
     {
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Credentials: true');
+
+        // Access-Control headers are received during OPTIONS requests
+        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+
+            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+                // may also be using PUT, PATCH, HEAD etc
+                header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+
+            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+                header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+        }
         $method = $this->input->method(true);
 
         if ($method == 'POST') {
