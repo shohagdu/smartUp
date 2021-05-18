@@ -5,7 +5,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <head>
     <base href="<?php echo base_url();?>"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title> খাদ্য বান্ধব কর্মসূচি খাদ্য গ্রহণের তালিকা</title>
+    <title>ভিজিডি কর্মসূচি খাদ্য গ্রহণের তালিকা </title>
     <meta name="robots" content="index, nofollow" />
     <link rel="shortcut icon" href="img/favicon.ico"  type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="reports_css/reports.css"/>
@@ -95,11 +95,17 @@ if(empty($_GET['programInfo'])) {
     <div class="fix top-side">
         <div class="fix heading">
             <h2><?php echo (!empty($all_data->full_name)?$all_data->full_name:'');?></h2>
-            <h4><?php echo $all_data->gram;?></h4>
+            <h4><?php echo (!empty($all_data->gram)?$all_data->gram:''); echo (!empty($all_data->thana)?", ".$all_data->thana:''); echo (!empty($all_data->district)?", ".$all_data->district:''); ?> </h4>
             <p class="highilight">
-                <span>খাদ্য বান্ধব কর্মসূচি খাদ্য গ্রহণের তালিকা</span>
+                <span>ভিজিডি কর্মসূচি খাদ্য গ্রহণের তালিকা</span>
             </p>
-            <h4 style="font-size: 15px;">প্রিন্ট তারিখঃ  <?php echo $this->web->banDate(date('d-m-Y'));?></h4>
+
+            <?php
+            echo (($report['data'][0]->circleTitle)?"<span style='font-weight: bold;'>চক্র: </span>".$report['data'][0]->circleTitle:'');
+                echo (!empty($report['data'][0]->program_name)?", <span style='font-weight: bold;'>মাস: </span> ".$report['data'][0]->program_name:'');
+
+            ?>
+            <span style="font-size: 15px;">, প্রিন্ট তারিখঃ  <?php echo $this->web->banDate(date('d-m-Y'));?></span>
         </div>
         <div class="fix footer">
             <table cellpadding="0" cellspacing="0" width="99%" style="margin: 0px auto; border-collapse:collapse;table-layout: auto;" >

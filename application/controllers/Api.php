@@ -401,7 +401,7 @@ class Api extends CI_Controller
         responsible_uno_info
        
         ")
-                ->join('food_vgd_applicant_info','food_vgd_applicant_info.nid=vgd_attendance_logs.nid_no','left')
+                ->join('food_vgd_applicant_info','food_vgd_applicant_info.vgd_card_no=vgd_attendance_logs.card_no','left')
                 ->limit(10)
                 ->get_where("vgd_attendance_logs", [
                     "is_process" => 0
