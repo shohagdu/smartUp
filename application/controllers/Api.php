@@ -318,6 +318,7 @@ class Api extends CI_Controller
 
     public function vgd_process_log_data()
     {
+
         error_reporting();
         header("Access-Control-Allow-Origin: *");
         header('Access-Control-Allow-Credentials: true');
@@ -343,15 +344,13 @@ class Api extends CI_Controller
 
         ]);
 
+
         if($foodProgram->num_rows() > 0){
             $foodProgramData= $foodProgram->row();
         }else{
             die(json_encode( ['status'=>'error','message'=>'Sorry!! No Active Food Program Found, Please first active one Food Program ','data'=>[]]));
         }
 
-        //  echo "<pre>";
-        //  print_r($foodProgramData);
-        //  exit;
 
 
         // Get Current Circle information start
@@ -365,18 +364,20 @@ class Api extends CI_Controller
                   responsibile_officer,
                   responsibile_uno
                   ")->get_where("food_vgd_circle_setup", [
-            "food_vgd_circle_setup.is_active"=>  1
+                    "food_vgd_circle_setup.is_active"=>  1
+                    ]
+        );
 
-        ]);
 
         if($currentCircleInfo->num_rows() <= 0){
             die(json_encode( ['status'=>'error','message'=>'Sorry!! No Active VGD Circle Found, Please first active one VGD Circle ','data'=>[]]));
         }else{
             $currentCircleData= $currentCircleInfo->row();
         }
-        //   echo "<pre>";
-        //   print_r($currentCircleData);
-        //   exit;
+
+//           echo "<pre>";
+//           print_r($currentCircleData);
+//           exit;
         // Get Current Circle information end
 
         $un_process_data =
@@ -394,11 +395,13 @@ class Api extends CI_Controller
         food_vgd_applicant_info.nid as applicant_nid,
         food_vgd_applicant_info.gurdian_name,
         food_vgd_applicant_info.mobile_no,
+        food_vgd_applicant_info.vgd_card_no,
         card_issue_dt,
         date_of_birth,
         implementing_authority,
         responsible_officer,
-        responsible_uno_info
+        responsible_uno_info,
+        vgd_attendance_logs.card_no as log_card_no
        
         ")
                 ->join('food_vgd_applicant_info','food_vgd_applicant_info.vgd_card_no=vgd_attendance_logs.card_no','left')
@@ -408,9 +411,9 @@ class Api extends CI_Controller
                 ])->result()
         ;
 
-        //   echo "<pre>";
-        //   print_r($un_process_data);
-        //   exit;
+//           echo "<pre>";
+//           print_r($un_process_data);
+//           exit;
 
         $user_id = '';
         $attendance_date = '';
@@ -437,14 +440,16 @@ class Api extends CI_Controller
                   food_vgd_receiver_info.id, 
                   food_vgd_receiver_info.applicant_id, 
                   food_vgd_receiver_info.vgd_circle_id, 
-                  receive_dt
+                  receive_dt,food_vgd_receiver_info.vgd_program_id
                   ")
                         ->join('food_program_info','food_program_info.id=food_vgd_receiver_info.vgd_program_id AND food_program_info.is_active=1 AND  food_program_info.program_type=2','left')
                         ->get_where("food_vgd_receiver_info", [
-                            "food_vgd_receiver_info.applicant_id"=>  $item->applicant_primary_id
+                            "food_vgd_receiver_info.applicant_id"=>  $item->applicant_primary_id,
+                            "food_vgd_receiver_info.vgd_program_id"=>  $foodProgramData->programID
 
                         ]);
-
+//                    echo $this->db->last_query();
+//                    exit;
 
                     if ($existance_qry->num_rows() > 0) {
                         $update_data_info = [
